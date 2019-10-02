@@ -20,12 +20,16 @@ alias ...='cd ../..'
 alias core='cd ~/Code/bedrock/core'
 alias 406io='cd ~/Code/406io'
 alias ccl='cd ~/Code/ccl/web/app/themes/crystalcreek'
+alias venv='python3 -m venv venv'
+alias act='. venv/bin/activate'
+alias pytest='python3 -m unittest'
 
 # Laravel aliases
 alias nrd='npm run dev'
 alias artisan='php artisan'
 alias art='php artisan'
 alias lreset='rm -rf ./vendor && composer install && npm ci && npm run dev'
+alias tower='php ~/Code/tower/tower'
 
 # Git command aliases
 alias gac='git add . && git commit'
@@ -78,6 +82,13 @@ function gpr() {
     open "https://$repo_url/compare/${1:-master}...$branch_name"
 }
 
+# Open the github for this repo
+function gh() {
+    local repo_url=`git remote get-url origin | sed -e 's/git@//' -e 's/.git//' -e 's/:/\//'`
+    open "https://$repo_url"
+}
+
+
 # Open the create issue page for this repo (with optional title)
 function gis() {
     local repo_url=`git remote get-url origin | sed -e 's/git@//' -e 's/.git//' -e 's/:/\//'`
@@ -86,10 +97,28 @@ function gis() {
 
 # Start a new laravel project with austenc/preset
 function newapp() {
-    composer create-project laravel/laravel ${1:-newapp}
+    composer create-project laravel/laravel ${1:-newapp} --prefer-dist
     cd ${1:-newapp}
     composer require austenc/preset --dev
     art preset austencam
     npm i && npm run dev
+}
+
+function newsite() {
+    local sitename=${1:-newsite}
+
+    # Create the statamic site and rename please to artisan
+    cd ~/Code && statamic new $sitename
+    cd $sitename && php please clear:site
+    mv please artisan
+
+    # Setup the base theme
+    cd site/themes && git clone git@github.com:austenc/freebird.git
+    cd freebird && rm -rf .git
+    npm i && npm run dev
+    echo 'theme: freebird' >> ~/Code/$sitename/site/settings/theming.yaml
+
+    # Go to the site directory and open vscode
+    cd ~/Code/$sitename && code .
 }
 
