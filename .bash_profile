@@ -15,6 +15,8 @@ export PATH=${PATH}:/usr/local/opt/mysql@5.7/bin
 source /usr/local/etc/bash_completion.d/git-completion.bash
 
 # Directory / Navigation aliases
+alias ..='cd ..'
+alias ...='cd ../..'
 alias core='cd ~/Code/bedrock/core'
 alias 406io='cd ~/Code/406io'
 alias ccl='cd ~/Code/ccl/web/app/themes/crystalcreek'
@@ -69,19 +71,17 @@ function dev() {
     cd ~/Code/${1:-$PWD} && code . && npm run watch;
 }
 
-# Open the github pull request page for current branch or passed in argument
+# Open pull request page for current branch (or specify with optional argument)
 function gpr() {
-    local github_url=`git remote -v | awk '/fetch/{print $2}' | sed -Ee 's#(git@|git://)#http://#' -e 's@com:@com/@' -e 's%\.git$%%'`;
-    local branch_name=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3`;
-    local url=$github_url"/compare/${1:-master}..."$branch_name
-    open $url;
+    local branch_name=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3`
+    local repo_url=`git remote get-url origin | sed -e 's/git@//' -e 's/.git//' -e 's/:/\//'`
+    open "https://$repo_url/compare/${1:-master}...$branch_name"
 }
 
-# Open the create issue page for this repo
+# Open the create issue page for this repo (with optional title)
 function gis() {
-    local github_url=`git remote -v | awk '/fetch/{print $2}' | sed -Ee 's#(git@|git://)#http://#' -e 's@com:@com/@' -e 's%\.git$%%'`;
-    local url=$github_url"/issues/new/?title=${1:-}";
-    open $url;
+    local repo_url=`git remote get-url origin | sed -e 's/git@//' -e 's/.git//' -e 's/:/\//'`
+    open "https://$repo_url/issues/new?title=${1:-}"
 }
 
 # Start a new laravel project with austenc/preset
