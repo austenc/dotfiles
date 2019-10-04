@@ -1,0 +1,20 @@
+# Laravel aliases
+alias nrd='npm run dev'
+alias artisan='php artisan'
+alias art='php artisan'
+alias lreset='rm -rf ./vendor && composer install && npm ci && npm run dev'
+alias tower='php ~/Code/tower/tower'
+
+# Start a new laravel project with austenc/preset
+function newapp() {
+    composer create-project laravel/laravel ${1:-newapp} --prefer-dist
+    cd ${1:-newapp}
+    composer require austenc/preset --dev
+    art preset austencam
+    npm i && npm run dev
+}
+
+# Open dev setup for the current project / folder
+function dev() {
+    cd ~/Code/${1:-$PWD} && code . && npm run watch;
+}
