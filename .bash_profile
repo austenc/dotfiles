@@ -104,21 +104,5 @@ function newapp() {
     npm i && npm run dev
 }
 
-function newsite() {
-    local sitename=${1:-newsite}
-
-    # Create the statamic site and rename please to artisan
-    cd ~/Code && statamic new $sitename
-    cd $sitename && php please clear:site
-    mv please artisan
-
-    # Setup the base theme
-    cd site/themes && git clone git@github.com:austenc/freebird.git
-    cd freebird && rm -rf .git
-    npm i && npm run dev
-    echo 'theme: freebird' >> ~/Code/$sitename/site/settings/theming.yaml
-
-    # Go to the site directory and open vscode
-    cd ~/Code/$sitename && code .
-}
-
+# Function to quickly bootstrap a new statamic site
+. ~/Code/dotfiles/.newsite
