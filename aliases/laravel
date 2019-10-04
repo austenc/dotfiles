@@ -16,5 +16,12 @@ function newapp() {
 
 # Open dev setup for the current project / folder
 function dev() {
-    cd ~/Code/${1:-$PWD} && code . && npm run watch;
+    cd ~/Code/${1:-$PWD} && code .;
+    if [ "$2" = "-w" ]; then
+        npm run watch
+    fi
+}
+
+function createdb() {
+    mysql -uroot -e "create database if not exists ${1:laravel};"
 }
