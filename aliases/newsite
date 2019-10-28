@@ -5,7 +5,7 @@ cd ~/Code
 
 git clone git@github.com:austenc/firebird.git $sitename
 
-cd $sitename
+cd $sitename && rm -rf .git
 cp .env.example .env
 
 # Setup the base theme
