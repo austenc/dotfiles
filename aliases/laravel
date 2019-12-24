@@ -2,6 +2,7 @@
 alias nrd='npm run dev'
 alias artisan='php artisan'
 alias art='php artisan'
+alias plz='php please'
 alias lreset='rm -rf ./vendor && composer install && npm ci && npm run dev'
 alias tower='php ~/Code/tower/tower'
 
