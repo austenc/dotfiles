@@ -1,2 +1,4 @@
-.DS_Store
 .php_cs.cache
+.DS_Store
+.DS_Store?
+.vscode/
