@@ -5,7 +5,11 @@ alias artisan='php artisan'
 alias art='php artisan'
 alias plz='php please'
 alias lreset='rm -rf ./vendor && composer install && npm ci && npm run dev'
-alias tower='php ~/Code/tower/tower'
+
+# Control multiple TMU instances
+function tower() {
+    php ~/Code/tower/artisan tower:$@
+}
 
 # Start a new laravel project with austenc/preset
 function newapp() {
