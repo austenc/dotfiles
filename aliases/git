@@ -12,6 +12,7 @@ alias gm='git merge'
 alias gco='git checkout'
 alias phpunit='vendor/bin/phpunit'
 alias nah='git reset --hard && git clean -df'
+alias wip='git add . && git commit -m "wip"'
 
 # Allow bash completion on above aliases
 __git_complete gco _git_checkout
