@@ -13,13 +13,6 @@ alias gco='git checkout'
 alias phpunit='vendor/bin/phpunit'
 alias nah='git reset --hard && git clean -df'
 
-# Allow bash completion on above aliases
-__git_complete gco _git_checkout
-__git_complete gb _git_branch
-__git_complete gm _git_merge
-__git_complete gp _git_pull
-__git_complete gpu _git_push
-
 # Some more Git aliases from https://gist.github.com/robmiller/6018582
 # Get the current branch name (not so useful itself, but used in other aliases): 
 alias branch-name='git rev-parse --abbrev-ref HEAD'
