@@ -13,11 +13,13 @@ function tower() {
 
 # Start a new laravel project with austenc/preset
 function newapp() {
-    composer create-project laravel/laravel ${1:-newapp} --prefer-dist
+    git clone git@github.com:austenc/booster.git ${1:-newapp}
     cd ${1:-newapp}
-    composer require austenc/preset --dev
-    art preset austencam
+    rm -rf .git
+    composer install
     npm i && npm run dev
+    cp .env.example .env
+    php artisan key:generate
 }
 
 # Open dev setup for the current project / folder
