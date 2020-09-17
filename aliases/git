@@ -38,13 +38,6 @@ function gpr() {
     open "https://$repo_url/compare/${1:-master}...$branch_name"
 }
 
-# Open the github for this repo
-function gh() {
-    local repo_url=`git remote get-url origin | sed -e 's/git@//' -e 's/.git//' -e 's/:/\//'`
-    open "https://$repo_url"
-}
-
-
 # Open the create issue page for this repo (with optional title)
 function gis() {
     local repo_url=`git remote get-url origin | sed -e 's/git@//' -e 's/.git//' -e 's/:/\//'`
