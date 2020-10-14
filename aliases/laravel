@@ -12,13 +12,12 @@ function tower() {
     php ~/Code/tower/artisan tower:$@
 }
 
-# Start a new laravel project with austenc/preset
+# Start a new laravel project with austencam/cable
 function newapp() {
-    git clone git@github.com:austenc/booster.git ${1:-newapp}
+    composer create-project --prefer-dist laravel/laravel ${1:-newapp}
     cd ${1:-newapp}
-    rm -rf .git
-    composer install
-    npm i && npm run dev
+    composer require austencam/cable
+    php artisan cable:run
     cp .env.example .env
     php artisan key:generate
 }
