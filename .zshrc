@@ -30,3 +30,6 @@ antibody bundle < .zsh_plugins
 # Similar to Ctrl+R, but easier -- via zsh-history-substring-search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+
+# Enable vi mode when hitting escape
+bindkey -v
