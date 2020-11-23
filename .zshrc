@@ -18,5 +18,5 @@ fi
 
 # Pull in various bash aliases from the dotfiles repo
 for f in ~/Code/dotfiles/aliases/*; do
-   . $f
+  . $f
 done
