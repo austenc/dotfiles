@@ -1,22 +1,32 @@
-# Powerline
-# https://github.com/powerline/powerline
-. /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+# Pull in the powerlevel10k theme
+source ~/Code/dotfiles/theme/theme.zsh
 
-# Add the global composer install directory to our PATH
+# Run a given command with the x86 architecture flag.
+# Useful for installing things that aren't yet ARM-compatible with Rosetta 2.
+x86() {
+  arch -x86_64 $@
+}
+
+# Add composer vendor directory to the system path. This allows things globally 
+# installed with composer to be called, such as Laravel Valet.
 export PATH=${PATH}:~/.composer/vendor/bin
-export PATH=${PATH}:/usr/local/opt/mysql@5.7/bin
 
-# Enable git autocomplete, first make sure homebrew is installed, 
-# then run `brew install git zsh-completion`
-# make sure you do not miss the "git" part of the command!
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+# Include compinit so we can use extra completions
+autoload -Uz compinit && compinit -C
 
-  autoload -Uz compinit
-  compinit
-fi
-
-# Pull in various bash aliases from the dotfiles repo
+# Pull in various aliases from the dotfiles repo
 for f in ~/Code/dotfiles/aliases/*; do
-  . $f
+  source $f
 done
+
+# Include the Antibody plugin framework
+source <(antibody init)
+
+# Include the bundles from Antibody
+# These are zsh plugins for the theme, extra completions, etc...
+antibody bundle < .zsh_plugins
+
+# Bind up and down keys to utilize substring searching for partial commands
+# Similar to Ctrl+R, but easier -- via zsh-history-substring-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
