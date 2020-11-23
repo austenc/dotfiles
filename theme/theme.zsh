@@ -7,5 +7,3 @@ fi
 
 # To customize prompt edit p10k.zsh.
 [[ ! -f ~/Code/dotfiles/theme/p10k.zsh ]] || source ~/Code/dotfiles/theme/p10k.zsh
-
-

@@ -24,7 +24,7 @@ source <(antibody init)
 
 # Include the bundles from Antibody
 # These are zsh plugins for the theme, extra completions, etc...
-antibody bundle < .zsh_plugins
+antibody bundle < ~/Code/dotfiles/.zsh_plugins
 
 # Bind up and down keys to utilize substring searching for partial commands
 # Similar to Ctrl+R, but easier -- via zsh-history-substring-search
@@ -33,3 +33,9 @@ bindkey '^[[B' history-substring-search-down
 
 # Enable vi mode when hitting escape
 bindkey -v
+
+# Rebind terminal defaults (so vi mode doesn't take them over)
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+bindkey '^k' kill-line
+
