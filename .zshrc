@@ -15,16 +15,14 @@ export PATH=${PATH}:~/.composer/vendor/bin
 autoload -Uz compinit && compinit -C
 
 # Pull in various aliases from the dotfiles repo
-for f in ~/Code/dotfiles/aliases/*; do
+for f in ~/Code/dotfiles/zsh/aliases/*.zsh; do
   source $f
 done
 
-# Include the Antibody plugin framework
-source <(antibody init)
-
-# Include the bundles from Antibody
+# Include the compiled Antibody plugins
 # These are zsh plugins for the theme, extra completions, etc...
-antibody bundle < ~/Code/dotfiles/.zsh_plugins
+# To edit the plugins, change zsh/plugins.zsh and run ./build.sh
+source ~/Code/dotfiles/zsh/plugins_compiled.zsh
 
 # Bind up and down keys to utilize substring searching for partial commands
 # Similar to Ctrl+R, but easier -- via zsh-history-substring-search
@@ -39,3 +37,5 @@ bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 bindkey '^k' kill-line
 
+# Set zsh-autosuggestions to use completion engine
+typeset -ga ZSH_AUTOSUGGEST_STRATEGY=(history completion)
