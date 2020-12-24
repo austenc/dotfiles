@@ -40,6 +40,7 @@ bindkey -v
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 bindkey '^k' kill-line
+bindkey '\e[3~' delete-char
 
 # Set zsh-autosuggestions to use completion engine
 typeset -ga ZSH_AUTOSUGGEST_STRATEGY=(history completion)
