@@ -15,7 +15,7 @@ alias nah='git reset --hard && git clean -df'
 alias wip='git add . && git commit -m "wip"'
 
 # Some more Git aliases from https://gist.github.com/robmiller/6018582
-# Get the current branch name (not so useful itself, but used in other aliases): 
+# Get the current branch name (not so useful itself, but used in other aliases):
 alias branch-name='git rev-parse --abbrev-ref HEAD'
 # Push the current branch to the remote "origin", and set it to track
 # the upstream branch
@@ -27,15 +27,15 @@ function pub {
 alias unpub='git push origin :$(branch-name)'
 # Unstage any files that have been added to the staging area
 alias unstage='git reset HEAD'
-# Delete any branches that have been merged into master
+# Delete any branches that have been merged into main
 # See also: https://gist.github.com/robmiller/5133264
-alias dmb="gco master && gb --merged | grep -v '\*' | xargs -n 1 git branch -d"
+alias dmb="gco main && gb --merged | grep -v '\*' | xargs -n 1 git branch -d"
 
 # Open pull request page for current branch (or specify with optional argument)
 function gpr() {
     local branch_name=`git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3`
     local repo_url=`git remote get-url origin | sed -e 's/git@//' -e 's/.git//' -e 's/:/\//'`
-    open "https://$repo_url/compare/${1:-master}...$branch_name"
+    open "https://$repo_url/compare/${1:-main}...$branch_name"
 }
 
 # Open the create issue page for this repo (with optional title)
