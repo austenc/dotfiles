@@ -11,6 +11,9 @@ x86() {
 # installed with composer to be called, such as Laravel Valet.
 export PATH=${PATH}:~/.composer/vendor/bin
 
+# Put homebrew in the application path
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Include compinit so we can use extra completions
 autoload -Uz compinit && compinit -C
 
