@@ -4,7 +4,7 @@ alias nrw='npm run watch'
 alias artisan='php artisan'
 alias art='php artisan'
 alias plz='php please'
-alias lreset='rm -rf ./vendor && composer install && npm ci && npm run dev'
+alias lreset='rm -rf ./vendor && composer install && npm ci && npm run build'
 alias composer='COMPOSER_MEMORY_LIMIT=-1 composer'
 
 # Require a package from a local folder
