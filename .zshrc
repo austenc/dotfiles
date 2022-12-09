@@ -1,12 +1,6 @@
 # Pull in the powerlevel10k theme
 source ~/Code/dotfiles/theme/theme.zsh
 
-# Run a given command with the x86 architecture flag.
-# Useful for installing things that aren't yet ARM-compatible with Rosetta 2.
-x86() {
-  arch -x86_64 $@
-}
-
 # Add composer vendor directory to the system path. This allows things globally
 # installed with composer to be called, such as Laravel Valet.
 export PATH=${PATH}:~/.composer/vendor/bin
