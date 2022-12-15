@@ -6,7 +6,7 @@ source ~/Code/dotfiles/theme/theme.zsh
 export PATH=${PATH}:~/.composer/vendor/bin
 
 # Put homebrew in the application path
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Include compinit so we can use extra completions
 autoload -Uz compinit && compinit -C
