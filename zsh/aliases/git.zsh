@@ -14,6 +14,7 @@ alias phpunit='vendor/bin/phpunit'
 alias nah='git reset --hard && git clean -df'
 alias wip='git add . && git commit -m "wip"'
 alias wipa='git add . && git commit --amend -m "wip"'
+alias wipp='git add . && git commit -m "wip" && pub'
 
 # Some more Git aliases from https://gist.github.com/robmiller/6018582
 # Get the current branch name (not so useful itself, but used in other aliases):
