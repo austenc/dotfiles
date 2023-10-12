@@ -48,23 +48,22 @@ function somefail() {
         testFile="tests/Feature/$file"
     elif [ -f "vendor/hdmaster/core/tests/Feature/$file" ]; then
         testFile="vendor/hdmaster/core/tests/Feature/$file"
-    else
-        echo "Test file not found."
-        return 1
     fi
-    echo $file
-    echo $test
 
     if [ -z "$test" ]
     then
-        command="./vendor/bin/phpunit $testFile"
+        command="artisan test $testFile --stop-on-error --stop-on-failure"
     else
-        command="./vendor/bin/phpunit $testFile --filter '^.*::${test:-}( .*)?$'"
+        if grep -q "$test" "$testFile"; then
+            command="artisan test $testFile --stop-on-error --stop-on-failure --filter '^.*::${test:-}( .*)?$'"
+        else
+            echo "Test not found in the file."
+            return 1
+        fi
     fi
 
     # Use eval to execute the command stored in the variable
     while eval $command; do
-        echo $command
         ((count++))
         echo "✅ Completed test run #$count.\n\n"
     done
