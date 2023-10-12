@@ -38,3 +38,34 @@ function dev() {
 function createdb() {
     mysql -uroot -e "create database if not exists ${1:laravel};"
 }
+
+function somefail() {
+    count=0
+    file=$1
+    test=$2
+    testFile=""
+    if [ -f "$(pwd)/tests/Feature/$file" ]; then
+        testFile="tests/Feature/$file"
+    elif [ -f "vendor/hdmaster/core/tests/Feature/$file" ]; then
+        testFile="vendor/hdmaster/core/tests/Feature/$file"
+    else
+        echo "Test file not found."
+        return 1
+    fi
+    echo $file
+    echo $test
+
+    if [ -z "$test" ]
+    then
+        command="./vendor/bin/phpunit $testFile"
+    else
+        command="./vendor/bin/phpunit $testFile --filter '^.*::${test:-}( .*)?$'"
+    fi
+
+    # Use eval to execute the command stored in the variable
+    while eval $command; do
+        echo $command
+        ((count++))
+        echo "✅ Completed test run #$count.\n\n"
+    done
+}
