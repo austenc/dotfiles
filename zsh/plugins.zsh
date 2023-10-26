@@ -8,7 +8,7 @@ zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 ohmyzsh/ohmyzsh path:plugins/composer
 ohmyzsh/ohmyzsh path:plugins/laravel
-ohmyzsh/ohmyzsh path:plugins/redis-cli
+# ohmyzsh/ohmyzsh path:plugins/redis-cli
 
 # Vi mode bindings
 ohmyzsh/ohmyzsh path:plugins/vi-mode
