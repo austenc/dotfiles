@@ -1,7 +1,15 @@
 set nocompatible   " Disable vi-compatibility
 set t_Co=256
 
-colorscheme xoria256
+" colorscheme xoria256
+
+" Dracula theme
+if v:version < 802
+    packadd! dracula
+endif
+syntax enable
+colorscheme dracula
+
 set guifont=menlo\ for\ powerline:h16
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
