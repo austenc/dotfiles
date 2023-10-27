@@ -3,7 +3,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Antidote (zsh plugin manager - https://getantidote.github.io/install)
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
-antidote load ~/Code/dotfiles/zsh/plugins.zsh ~/Code/dotfiles/zsh/plugins-compiled.zsh
+antidote load ~/Code/dotfiles/zsh/plugins.zsh ~/.zsh_plugins
 
 # Pull in the powerlevel10k theme
 source ~/Code/dotfiles/theme/theme.zsh
