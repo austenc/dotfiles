@@ -1,12 +1,16 @@
+# Put homebrew in the application path
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Antidote (zsh plugin manager - https://getantidote.github.io/install)
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+antidote load ~/Code/dotfiles/zsh/plugins.zsh ~/.zsh_plugins
+
 # Pull in the powerlevel10k theme
 source ~/Code/dotfiles/theme/theme.zsh
 
 # Add composer vendor directory to the system path. This allows things globally
 # installed with composer to be called, such as Laravel Valet.
 export PATH=${PATH}:~/.composer/vendor/bin
-
-# Put homebrew in the application path
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Include compinit so we can use extra completions
 autoload -Uz compinit && compinit -C
@@ -15,11 +19,6 @@ autoload -Uz compinit && compinit -C
 for f in ~/Code/dotfiles/zsh/aliases/*.zsh; do
   source $f
 done
-
-# Include the compiled Antibody plugins
-# These are zsh plugins for the theme, extra completions, etc...
-# To edit the plugins, change zsh/plugins.zsh and run ./build.sh
-source ~/Code/dotfiles/zsh/plugins_compiled.zsh
 
 # Bind up and down keys to utilize substring searching for partial commands
 # Similar to Ctrl+R, but easier -- via zsh-history-substring-search
