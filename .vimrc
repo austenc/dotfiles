@@ -1,8 +1,6 @@
 set nocompatible   " Disable vi-compatibility
 set t_Co=256
 
-" colorscheme xoria256
-
 " Dracula theme
 if v:version < 802
     packadd! dracula
