@@ -44,3 +44,7 @@ typeset -ga ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # This will be automatically enabled in the next version of zsh-autosuggestions:
 # See here - https://github.com/zsh-users/zsh-autosuggestions/issues/566#issuecomment-705955104
 typeset -gi ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+# Laravel Herd
+export PATH="/Users/austen/Library/Application Support/Herd/bin/":$PATH
+export HERD_PHP_82_INI_SCAN_DIR="/Users/austen/Library/Application Support/Herd/config/php/82/"
