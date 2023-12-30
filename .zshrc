@@ -45,6 +45,9 @@ typeset -ga ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # See here - https://github.com/zsh-users/zsh-autosuggestions/issues/566#issuecomment-705955104
 typeset -gi ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# DBNgin
+export PATH=/Users/Shared/DBngin/mysql/8.0.33/bin:$PATH
+
 # Laravel Herd
 export PATH="/Users/austen/Library/Application Support/Herd/bin/":$PATH
 export HERD_PHP_82_INI_SCAN_DIR="/Users/austen/Library/Application Support/Herd/config/php/82/"

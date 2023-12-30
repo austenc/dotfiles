@@ -36,7 +36,7 @@ function dev() {
 }
 
 function createdb() {
-    mysql -uroot -e "create database if not exists ${1:laravel};"
+    mysql --socket /tmp/mysql_3306.sock -uroot -e "create database if not exists ${1:-laravel};"
 }
 
 function somefail() {
