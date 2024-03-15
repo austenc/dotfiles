@@ -10,7 +10,6 @@ alias gb='git branch'
 alias gpu='git push'
 alias gm='git merge'
 alias gco='git checkout'
-alias phpunit='vendor/bin/phpunit'
 alias nah='git reset --hard && git clean -df'
 alias wip='git add . && git commit -m "wip" && pub'
 

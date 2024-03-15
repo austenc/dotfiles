@@ -1,10 +1,11 @@
 # Laravel aliases
 alias nrd='npm run dev'
-alias nrw='npm run watch'
-alias artisan='php artisan'
+alias nrtd='npm run tauri dev'
 alias art='php artisan'
 alias plz='php please'
 alias lreset='rm -rf ./vendor && composer install && npm ci && npm run build'
+alias lupdate='rm -rf vendor node_modules package-lock.json composer.lock && composer update && npm i && npm run build'
+alias phpunit='vendor/bin/phpunit'
 alias composer='COMPOSER_MEMORY_LIMIT=-1 composer'
 
 # Require a package from a local folder
