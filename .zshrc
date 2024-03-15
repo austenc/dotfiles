@@ -51,4 +51,10 @@ export PATH=/Users/Shared/DBngin/mysql/8.0.33/bin:$PATH
 # Laravel Herd
 export PATH="/Users/austen/Library/Application Support/Herd/bin/":$PATH
 export HERD_PHP_82_INI_SCAN_DIR="/Users/austen/Library/Application Support/Herd/config/php/82/"
+
+
+# Herd injected NVM configuration
+export NVM_DIR="/Users/austen/Library/Application Support/Herd/config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 [[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"

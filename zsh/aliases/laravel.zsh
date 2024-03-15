@@ -41,6 +41,28 @@ function createdb() {
 }
 
 function somefail() {
+    if [ "$1" = "--help" ]; then
+        cat <<EOF
+Usage: somefail FILE TEST
+
+This command is used to repeatedly run tests until they fail.
+Passing no arguments will run the entire test suite.
+Passing FILE or TEST arguments allows you to run a specific test file and/or test method.
+The command stops executing after the first failure.
+
+Arguments:
+  FILE  (Optional) Name of the test file within the 'tests/Feature' directory or within
+        'vendor/hdmaster/core/tests/Feature'. Do not include the directory path.
+  TEST  (Optional) The specific test method to run. If omitted, all tests in the
+        file are run.
+
+Examples:
+  somefail ExampleTest.php        # Runs all tests in ExampleTest.php
+  somefail ExampleTest.php testMethod  # Runs a specific test method in ExampleTest.php
+EOF
+        return 0
+    fi
+
     count=0
     file=$1
     test=$2
@@ -51,8 +73,7 @@ function somefail() {
         testFile="vendor/hdmaster/core/tests/Feature/$file"
     fi
 
-    if [ -z "$test" ]
-    then
+    if [ -z "$test" ]; then
         command="artisan test $testFile --stop-on-error --stop-on-failure"
     else
         if grep -q "$test" "$testFile"; then
