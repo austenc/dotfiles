@@ -1,6 +1,5 @@
 # Laravel aliases
 alias nrd='npm run dev'
-alias nrtd='npm run tauri dev'
 alias art='php artisan'
 alias plz='php please'
 alias lreset='rm -rf ./vendor && composer install && npm ci && npm run build'
