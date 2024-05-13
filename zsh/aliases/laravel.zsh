@@ -73,10 +73,10 @@ EOF
     fi
 
     if [ -z "$test" ]; then
-        command="artisan test $testFile --stop-on-error --stop-on-failure"
+        command="artisan test $testFile --parallel --stop-on-error --stop-on-failure"
     else
         if grep -q "$test" "$testFile"; then
-            command="artisan test $testFile --stop-on-error --stop-on-failure --filter '^.*::${test:-}( .*)?$'"
+            command="artisan test $testFile --parallel --stop-on-error --stop-on-failure --filter '^.*::${test:-}( .*)?$'"
         else
             echo "Test not found in the file."
             return 1
