@@ -6,6 +6,7 @@ alias lreset='rm -rf ./vendor && composer install && npm ci && npm run build'
 alias lupdate='rm -rf vendor node_modules package-lock.json composer.lock && composer update && npm i && npm run build'
 alias phpunit='vendor/bin/phpunit'
 alias composer='COMPOSER_MEMORY_LIMIT=-1 composer'
+alias tb='vendor/bin/testbench'
 
 # Require a package from a local folder
 composer-link() {
