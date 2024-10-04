@@ -66,6 +66,7 @@ EOF
     file=$1
     test=$2
     testFile=""
+
     if [ -f "$(pwd)/tests/Feature/$file" ]; then
         testFile="tests/Feature/$file"
     elif [ -f "vendor/hdmaster/core/tests/Feature/$file" ]; then
