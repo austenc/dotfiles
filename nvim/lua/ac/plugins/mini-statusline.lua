@@ -1,4 +1,5 @@
 return {
+    enabled = false,
     'echasnovski/mini.statusline',
     dependencies = {
         'echasnovski/mini.icons',

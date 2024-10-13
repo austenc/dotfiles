@@ -34,3 +34,9 @@ require("lazy").setup('ac.plugins', {
 })
 
 -- Normal Neovim config
+--
+
+-- Theming
+-- Enable true color support
+-- vim.o.termguicolors = true
+-- vim.cmd('colorscheme natty')

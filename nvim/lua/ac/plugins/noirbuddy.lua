@@ -1,4 +1,5 @@
 return {
+    enabled = false,
   'jesseleite/nvim-noirbuddy',
   dependencies = {
     { 'tjdevries/colorbuddy.nvim' }
