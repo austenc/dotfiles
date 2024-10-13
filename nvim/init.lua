@@ -1,28 +1,36 @@
--- Lazy.nvim - The Package Manager
+-- Set some vim options
+require('ac.options')
+
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
--- if vim.g.vscode then
-    -- Make Shift + Arrow keys work with Visual mode as normal selections
-    vim.keymap.set('n', '<S-Up>', 'v<Up>', { remap = false, silent = true })
-    vim.keymap.set('x', '<S-Up>', '<Up>', { remap = false, silent = true })
-    vim.keymap.set('n', '<S-Down>', 'v<Down>', { remap = false, silent = true })
-    vim.keymap.set('x', '<S-Down>', '<Down>', { remap = false, silent = true })
-    vim.keymap.set('n', '<S-Left>', 'v<Left>', { remap = false, silent = true })
-    vim.keymap.set('x', '<S-Left>', '<Left>', { remap = false, silent = true })
-    vim.keymap.set('n', '<S-Right>', 'v<Right>', { remap = false, silent = true })
-    vim.keymap.set('x', '<S-Right>', '<Right>', { remap = false, silent = true })
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
--- end
+-- Setup lazy.nvim
+require("lazy").setup('ac.plugins', {
+  ui = {
+    border = "rounded"
+  },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
+})
 
 -- Normal Neovim config
