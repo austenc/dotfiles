@@ -15,3 +15,7 @@ vim.keymap.set('n', '<Leader>O', '<C-w>o')
 
 -- Swap between previously active file
 vim.keymap.set('n', '<Leader>p', '<c-^>')
+
+-- Jesse's big idea 💡
+vim.keymap.set('n', '<Leader>=', 'ggVG=')
+

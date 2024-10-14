@@ -7,9 +7,11 @@ return {
     keys = {
         {'<Leader>f', function() require('telescope.builtin').git_files() end},
         {'<Leader>F', function() require('telescope.builtin').find_files() end},
-        {'<Leader>h', function() require('telescope.builtin').oldfiles() end},
+        {'<Leader>h', function() require('telescope.builtin').oldfiles({ cwd_only = true }) end},
         {'<Leader>H', function() require('telescope.builtin').help_tags() end},
+        {'<Leader>k', function() require('telescope.builtin').keymaps() end},
     },
+    cmd = { 'Telescope' },
     config = function ()
         local telescope = require('telescope')
         telescope.setup({
