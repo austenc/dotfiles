@@ -39,15 +39,23 @@ return {
             -- },
             window = {
                 position = 'right', -- Place the sidebar on the right
-                width = 40,
+                -- width = 40,
             },
             filesystem = {
                 visible = true,
                 follow_current_file = true,
                 use_libuv_file_watcher = true,
                 filtered_items = {
-                    hide_dotfiles = false,
-                    hide_gitignored = false,
+                    hide_dotfiles = true,
+                    hide_gitignored = true,
+                    always_show = {
+                        '.prettierrc',
+                        '.github',
+                    },
+                    always_show_by_pattern = {
+                        '.env*',
+                        'core*',
+                    },
                 },
             },
         })
