@@ -1,5 +1,4 @@
 return {
-    enabled = true,
     "scottmckendry/cyberdream.nvim",
     lazy = false,
     priority = 1000,

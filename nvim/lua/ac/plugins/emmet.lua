@@ -4,6 +4,7 @@
 
 return {
     'mattn/emmet-vim',
+    enabled = false,
     keys = {
         { '<C-e>', '<plug>(emmet-expand-abbr)', mode = 'i' },
         { ']e', '<plug>(emmet-move-next)' },

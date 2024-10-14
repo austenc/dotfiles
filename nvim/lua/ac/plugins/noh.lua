@@ -1,3 +1,3 @@
 return {
-    'jesseleite/vim-noh'
+    'jesseleite/vim-noh',
 }
