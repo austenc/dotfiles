@@ -41,6 +41,14 @@ return {
                 position = 'right', -- Place the sidebar on the right
                 width = 40,
             },
+            filesystem = {
+                follow_current_file = true,
+                use_libuv_file_watcher = true,
+                filtered_items = {
+                    hide_dotfiles = false,
+                    hide_gitignored = false,
+                },
+            },
         })
     end,
 }
