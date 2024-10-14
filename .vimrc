@@ -42,3 +42,4 @@ imap jj <esc>
 " Swap files out of the project root
 set backupdir=/tmp//
 set directory=/tmp//
+
