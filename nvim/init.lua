@@ -29,8 +29,3 @@ require('lazy').setup('ac.plugins', {
 })
 
 
--- Theming
--- Enable true color support
-vim.o.termguicolors = true
--- vim.cmd('colorscheme natty')
-
