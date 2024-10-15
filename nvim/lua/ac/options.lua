@@ -26,4 +26,4 @@ vim.opt.laststatus = 3
 
 -- Hide the command line unless it's needed
 -- Some day we can enable this... but it's too buggy for now.
--- vim.opt.cmdheight = 0
+vim.opt.cmdheight = 0
