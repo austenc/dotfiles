@@ -9,6 +9,7 @@ vim.keymap.set('n', '<Leader>v', vim.cmd.vsplit, { silent = true })
 -- Cycle through windows
 vim.keymap.set('n', '<Tab>', '<C-w>w')
 vim.keymap.set('n', '<S-Tab>', '<C-w>W')
+vim.keymap.set('n', '<C-i>', '<C-i>', { silent = true })
 
 -- Make window only window
 vim.keymap.set('n', '<Leader>O', '<C-w>o')
