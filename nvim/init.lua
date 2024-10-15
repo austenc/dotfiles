@@ -28,4 +28,3 @@ require('lazy').setup('ac.plugins', {
     checker = { enabled = true },
 })
 
-

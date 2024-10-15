@@ -6,6 +6,7 @@ return {
     },
     keys = {
         {'<Leader>f', function() require('telescope.builtin').git_files() end},
+        {'<M-p>', function() require('telescope.builtin').git_files() end}, -- for Hyper terminal Cmd+P
         {'<Leader>F', function() require('telescope.builtin').find_files() end},
         {'<Leader>h', function() require('telescope.builtin').oldfiles({ cwd_only = true }) end},
         {'<Leader>H', function() require('telescope.builtin').oldfiles({ cwd_only = true }) end},
@@ -15,6 +16,7 @@ return {
     cmd = { 'Telescope' },
     config = function ()
         local telescope = require('telescope')
+
         telescope.setup({
             defaults = {
                 sorting_strategy = "ascending",
