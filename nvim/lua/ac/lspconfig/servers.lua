@@ -3,15 +3,16 @@
 --------------------------------------------------------------------------------
 
 return {
-    -- intelephense = true,
-    -- -- phpactor = true,
-    -- html = {
-    --     filetypes = { 'html', 'blade', 'antlers' },
-    -- },
-    -- antlersls = true,
+    intelephense = true,
+    html = {
+        filetypes = { 'html', 'blade', 'antlers' },
+    },
+    antlersls = true,
     tailwindcss = true,
-    -- jsonls = true,
-    -- yamlls = true,
+    jsonls = true,
+    yamlls = true,
     lua_ls = true,
-    -- vimls = true,
+    emmet_language_server = {
+        filetypes = { "css", "html", "javascript", "blade", "svelte", "php"},
+    },
 }
