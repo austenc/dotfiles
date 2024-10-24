@@ -25,5 +25,11 @@ M.term = {
 	},
 }
 
+M.ui = {
+	statusline = {
+		theme = 'vscode_colored',
+	},
+}
+
 
 return M
