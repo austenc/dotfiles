@@ -36,6 +36,10 @@ map('n', '<Leader>=', 'ggVG=', { desc = 'autoindent entire file' })
 
 -- Settings mapped to <leader>, combos
 map("n", "<leader>,t", function() require("nvchad.themes").open() end, { desc = "telescope nvchad themes" })
+map("n", "<leader>,k", "<cmd>WhichKey <CR>", { desc = "keyboard shortcuts" })
+map("n", "<leader>,K", function()
+  vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
+end, { desc = "search key bindings" })
 
 -- Toggle terminal
 map({ "n", "t" }, "<leader>t", function()
