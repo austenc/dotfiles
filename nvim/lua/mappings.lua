@@ -4,7 +4,8 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- Wish we could have this, but it breaks repeat / next with f and t
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 
 map("i", "jk", "<ESC>")
 
@@ -23,7 +24,7 @@ map('n', '<Tab>', '<C-w>w')
 -- map('n', '<S-Tab>', '<C-w>W')
 
 -- Remap ctrl+i to be separate from Tab, so we can use with ctrl+o
--- map('n', '<C-i>', '<C-i>', { silent = true })
+map('n', '<C-i>', '<C-i>', { silent = true })
 
 -- Make window only window
 map('n', '<Leader>O', '<C-w>o', { desc = 'maximize window' })
@@ -33,6 +34,11 @@ map('n', '<Leader>p', '<c-^>', { desc = 'swap to previous file' })
 
 -- Jesse's big idea 💡
 map('n', '<Leader>=', 'ggVG=', { desc = 'autoindent entire file' })
+
+-- Semicolon and comma at the end of lines
+map('i', ';;', '<Esc>A;<Esc>')
+map('i', ',,', '<Esc>A,<Esc>')
+
 
 -- Settings mapped to <leader>, combos
 map("n", "<leader>,t", function() require("nvchad.themes").open() end, { desc = "telescope nvchad themes" })
