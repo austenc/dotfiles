@@ -6,46 +6,44 @@
 local M = {}
 
 M.base46 = {
-	theme = "jabuti",
-	transparency = true,
+    theme = 'jabuti',
+    transparency = true,
 
-
-	-- hl_override = {
-	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
+    -- hl_override = {
+    -- 	Comment = { italic = true },
+    -- 	["@comment"] = { italic = true },
+    -- },
 }
 
 M.nvdash = {
-	load_on_startup = true,
-	header = {
-		"                                                          ",
-		"    ██╗   ██╗███████╗     ██████╗ ██████╗ ██████╗ ███████╗",
-		"    ██║   ██║██╔════╝    ██╔════╝██╔═══██╗██╔══██╗██╔════╝",
-		"    ██║   ██║███████╗    ██║     ██║   ██║██║  ██║█████╗  ",
-		"    ╚██╗ ██╔╝╚════██║    ██║     ██║   ██║██║  ██║██╔══╝  ",
-		"     ╚████╔╝ ███████║    ╚██████╗╚██████╔╝██████╔╝███████╗",
-		"      ╚═══╝  ╚══════╝     ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝",
-		"                                                          ",
-		"                   Like Neovim, but better!               ",
-		"                                                          ",
-	},
+    load_on_startup = true,
+    header = {
+        '                                                          ',
+        '    ██╗   ██╗███████╗     ██████╗ ██████╗ ██████╗ ███████╗',
+        '    ██║   ██║██╔════╝    ██╔════╝██╔═══██╗██╔══██╗██╔════╝',
+        '    ██║   ██║███████╗    ██║     ██║   ██║██║  ██║█████╗  ',
+        '    ╚██╗ ██╔╝╚════██║    ██║     ██║   ██║██║  ██║██╔══╝  ',
+        '     ╚████╔╝ ███████║    ╚██████╗╚██████╔╝██████╔╝███████╗',
+        '      ╚═══╝  ╚══════╝     ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝',
+        '                                                          ',
+        '                   Like Neovim, but better!               ',
+        '                                                          ',
+    },
 }
 
 M.term = {
-	float = {
-		width = 0.9,
-		height = 0.3,
-		col = 0.035,
-		row = 0.3,
-	},
+    float = {
+        width = 0.9,
+        height = 0.3,
+        col = 0.035,
+        row = 0.3,
+    },
 }
 
 M.ui = {
-	statusline = {
-		theme = 'vscode_colored',
-	},
+    statusline = {
+        theme = 'vscode_colored',
+    },
 }
-
 
 return M
