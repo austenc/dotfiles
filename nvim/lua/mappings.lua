@@ -1,7 +1,7 @@
 require 'nvchad.mappings'
 
-local unmap = vim.keymap.del
 local map = vim.keymap.set
+local unmap = vim.keymap.del
 
 -- Cleanup / Unmappings
 -------------------------------------------------------------------------------
@@ -48,10 +48,22 @@ map('n', '<Leader>p', '<c-^>', { desc = 'swap to previous file' })
 map('i', ';;', '<Esc>A;<Esc>')
 map('i', ',,', '<Esc>A,<Esc>')
 -- Move lines up and down with alt + j and k
-map('n', '<A-j>', '<Esc>:m .+1<CR>==', { desc = 'move line down' })
-map('n', '<A-k>', '<Esc>:m .-2<CR>==', { desc = 'move line up' })
+map('n', '<A-j>', ':m .+1<CR>==', { silent = true, desc = 'move line down' })
+map('n', '<A-k>', ':m .-2<CR>==', { silent = true, desc = 'move line up' })
+map('i', '<A-j>', '<Esc>:m .+1<CR>==gi', { silent = true, desc = 'move line down' })
+map('i', '<A-k>', '<Esc>:m .-2<CR>==gi', { silent = true, desc = 'move line up' })
+map('v', '<A-j>', ':m \'>+1<CR>gv=gv', { silent = true, desc = 'move line down' })
+map('v', '<A-k>', ':m \'<-2<CR>gv=gv', { silent = true, desc = 'move line up' })
 -- Jesse's big idea 💡 indent entire file correctly
 map('n', '<Leader>=', 'ggVG=', { desc = 'autoindent entire file' })
+-- Keep visual selection when indenting
+map('x', '>', '>gv')
+map('x', '<', '<gv')
+-- Break undo sequence on specific characters thanks to @jesseleite
+map('i', ',', ',<C-g>u')
+map('i', '.', '.<C-g>u')
+map('i', '!', '!<C-g>u')
+map('i', '?', '?<C-g>u')
 
 
 -- Configuration & Settings
@@ -72,6 +84,8 @@ end, { desc = 'telescope keymaps' })
 map('n', '<leader>?', function()
     require('telescope.builtin').help_tags()
 end, { desc = 'telescope help' })
+-- Toggleable settings
+map('n', '<leader>,i', '<cmd>IBLToggle<CR>', { desc = 'toggle indentation guides' })
 
 -- Terminal
 -------------------------------------------------------------------------------
