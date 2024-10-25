@@ -76,16 +76,24 @@ map('n', '<leader>,k', '<cmd>WhichKey <CR>', { desc = 'keyboard shortcuts' })
 map('n', '<leader>,K', function()
     vim.cmd('WhichKey ' .. vim.fn.input 'WhichKey: ')
 end, { desc = 'search key bindings' })
+-- Toggleable settings
+map('n', '<leader>,i', '<cmd>IBLToggle<CR>', { desc = 'toggle indentation guides' })
+
+-- Telescope
+-------------------------------------------------------------------------------
 -- Keybinding search via Telescope
 map('n', '<leader>fk', function()
     require('telescope.builtin').keymaps()
 end, { desc = 'telescope keymaps' })
+-- Search commands via Telescope
+map('n', '<leader>fc', function()
+    require('telescope.builtin').commands()
+end, { desc = 'telescope commands' })
 -- Search help via Telescope
 map('n', '<leader>?', function()
     require('telescope.builtin').help_tags()
 end, { desc = 'telescope help' })
--- Toggleable settings
-map('n', '<leader>,i', '<cmd>IBLToggle<CR>', { desc = 'toggle indentation guides' })
+
 
 -- Terminal
 -------------------------------------------------------------------------------
