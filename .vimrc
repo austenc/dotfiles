@@ -13,7 +13,7 @@ nnoremap \m /^class\<CR>i@\<Esc>f=c2l([\'\<Esc>f)ldt"i\<Del>\<Esc>F\'hpF\'
 "let @c = '/^class\<CR>i@\<Esc>f=c2l([\'\<Esc>f)ldt"i\<Del>\<Esc>F\'hpF\''
 "let @c = '/^class\<CR>i@<Esc>f=c2l([\'<Esc>f)ldt"i<Del><Esc>F\'hpF\''
 
-set guifont=menlo\ for\ powerline:h16
+" set guifont=menlo\ for\ powerline:h16
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
 set go-=L " Removes left hand scroll bar
@@ -47,4 +47,3 @@ imap jj <esc>
 " Swap files out of the project root
 set backupdir=/tmp//
 set directory=/tmp//
-

@@ -1,7 +1,7 @@
 return {
     'nvim-neo-tree/neo-tree.nvim',
     enabled = true,
-    dependencies = { 
+    dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-tree/nvim-web-devicons', -- For file icons
         'MunifTanjim/nui.nvim',
@@ -62,10 +62,3 @@ return {
         })
     end,
 }
-
-
-
-
-
-
-
