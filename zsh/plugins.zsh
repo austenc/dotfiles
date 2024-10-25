@@ -4,6 +4,9 @@ romkatv/powerlevel10k
 # Automatic suggestions like the fish shell
 zsh-users/zsh-autosuggestions
 
+# Zoxide for zooming around - needs brew install zoxide
+ajeetdsouza/zoxide
+
 # Completions
 zsh-users/zsh-completions
 ohmyzsh/ohmyzsh path:plugins/composer
