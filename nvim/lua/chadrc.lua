@@ -32,9 +32,9 @@ M.nvdash = {
     buttons = {
         { txt = "  Recent Files", keys = "fo", cmd = "Telescope oldfiles" },
         { txt = "  Find Files", keys = "ff", cmd = "Telescope find_files" },
-        { txt = "󰈭  Find Word", keys = "fw", cmd = "Telescope live_grep" },
-        { txt = "󱥚  Themes", keys = "th", cmd = ":lua require('nvchad.themes').open()" },
-        { txt = "  Mappings", keys = "ch", cmd = "NvCheatsheet" },
+        { txt = "󰈭  Find Word in Files", keys = "fw", cmd = "Telescope live_grep" },
+        { txt = "  Cheatsheet", keys = "ch", cmd = "NvCheatsheet" },
+        { txt = "󱥚  Color Themes", keys = "th", cmd = ":lua require('nvchad.themes').open()" },
 
       { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
 
