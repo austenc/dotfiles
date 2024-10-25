@@ -26,13 +26,16 @@ map('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'nvimtree toggle windo
 
 -- Window management
 -------------------------------------------------------------------------------
--- map('n', '<leader>wv', function()
---     vim.cmd.vsplit()
---     vim.cmd.enew()
---     vim.cmd.Dashboard() -- TODO: This doesn't work
--- end, { silent = true, desc = 'window vertical split with dashboard' })
-map('n', '<leader>wv', vim.cmd.vsplit, { silent = true, desc = 'window vertical split' }) -- Vertical split
-map('n', '<leader>wh', vim.cmd.hsplit, { silent = true, desc = 'window horizontal split' }) -- Horizontal split
+-- map('n', '<leader>wv', vim.cmd.vsplit, { silent = true, desc = 'window vertical split' }) -- Vertical split
+-- map('n', '<leader>wh', vim.cmd.hsplit, { silent = true, desc = 'window horizontal split' }) -- Horizontal split
+map('n', '<leader>wv', function()
+    vim.cmd.vsplit()
+    vim.cmd.Nvdash()
+end, { silent = true, desc = 'window vertical split' })
+map('n', '<leader>wh', function()
+    vim.cmd.hsplit()
+    vim.cmd.Nvdash()
+end, { silent = true, desc = 'window horizontal split' })
 map('n', '<Leader>O', '<C-w>o', { desc = 'window maximize' }) -- Maximize Make window only window
 map('n', '<Tab>', '<C-w>w') -- Cycle to next window
 map('n', '<S-Tab>', '<C-w>W') -- Cycle to previous window
@@ -78,6 +81,7 @@ map('n', '<leader>,K', function()
 end, { desc = 'search key bindings' })
 -- Toggleable settings
 map('n', '<leader>,i', '<cmd>IBLToggle<CR>', { desc = 'toggle indentation guides' })
+
 
 -- Telescope
 -------------------------------------------------------------------------------
