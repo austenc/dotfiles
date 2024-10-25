@@ -26,6 +26,11 @@ map('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'nvimtree toggle windo
 
 -- Window management
 -------------------------------------------------------------------------------
+-- map('n', '<leader>wv', function()
+--     vim.cmd.vsplit()
+--     vim.cmd.enew()
+--     vim.cmd.Dashboard() -- TODO: This doesn't work
+-- end, { silent = true, desc = 'window vertical split with dashboard' })
 map('n', '<leader>wv', vim.cmd.vsplit, { silent = true, desc = 'window vertical split' }) -- Vertical split
 map('n', '<leader>wh', vim.cmd.hsplit, { silent = true, desc = 'window horizontal split' }) -- Horizontal split
 map('n', '<Leader>O', '<C-w>o', { desc = 'window maximize' }) -- Maximize Make window only window
