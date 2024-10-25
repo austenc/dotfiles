@@ -13,15 +13,10 @@ unmap('n', '<leader>wK') -- whichkey full keymap
 -- unmap('n', '<leader>wa') -- LSP add workspace folder
 -- unmap('n', '<leader>wr') -- LSP remove workspace folder
 
--- Save file with Ctrl+S -- remap Cmd+S to Ctrl+S in iterm with "send vim text \<C-s> (with prefix slash)"
-map({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr>")
-
-
 -- Sidebar
 -------------------------------------------------------------------------------
 -- Toggle file tree on and off
 map('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'nvimtree toggle window' })
--- Unmap tab and shift tab from the file tree
 -- TODO: This doesn't work
 
 -- Window management
@@ -47,6 +42,9 @@ map('n', '<Leader>p', '<c-^>', { desc = 'swap to previous file' })
 
 -- Editing
 -------------------------------------------------------------------------------
+-- Save file with Ctrl+S -- remap Cmd+S to Ctrl+S in iterm with "send vim text \<C-s> (with prefix slash)"
+map({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr>")
+
 -- Semicolon and comma at the end of lines
 map('i', ';;', '<Esc>A;<Esc>')
 map('i', ',,', '<Esc>A,<Esc>')
