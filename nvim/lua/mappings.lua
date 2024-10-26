@@ -107,6 +107,14 @@ end, { desc = 'search key bindings' })
 map('n', '<leader>,i', '<cmd>IBLToggle<CR>', { desc = 'toggle indentation guides' })
 map('n', '<leader>,n', '<cmd>set rnu!<CR>', { desc = 'toggle line numbers' })
 map('n', '<leader>,c', '<cmd>NvCheatsheet<CR>', { desc = 'toggle cheatsheet' })
+-- Toggle line height with <leader>kk
+map('n', '<leader>kk', function()
+  if vim.o.linespace == 0 then
+    vim.o.linespace = 6  -- Adjust this value for 1.5x (6) or 2.0x (10)
+  else
+    vim.o.linespace = 0  -- Normal line height
+  end
+end, { desc = "Toggle line height" })
 
 
 -- Telescope
