@@ -2,6 +2,8 @@ local cmp = require 'cmp'
 
 return {
     mapping = cmp.mapping.preset.insert({
+        ['<C-i>'] = cmp.select_next_item(),
+
         ["<Down>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -12,7 +14,7 @@ return {
           end
         end, { "i", "s" }),
 
-        ["<Down>"] = cmp.mapping(function(fallback)
+        ["<Up>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
           elseif require("luasnip").jumpable(-1) then
