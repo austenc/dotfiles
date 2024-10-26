@@ -8,6 +8,12 @@ local unmap = vim.keymap.del
 -- <leader>w
 unmap('n', '<leader>wk') -- whichkey search
 unmap('n', '<leader>wK') -- whichkey full keymap
+-- NVChad defaults
+unmap('n', '<leader>n')
+unmap('n', '<leader>rn')
+unmap('n', '<leader>fm')
+unmap('n', '<leader>th')
+-- unmap('n', '<leader>ch', '<cmd>NvCheatsheet<CR>')
 -- These don't work because they must not be registered yet
 -- unmap('n', '<leader>wl') -- LSP list workspace folders
 -- unmap('n', '<leader>wa') -- LSP add workspace folder
@@ -40,10 +46,30 @@ map('n', '<C-i>', '<C-i>', { silent = true })
 map('n', '<Leader>p', '<c-^>', { desc = 'swap to previous file' })
 
 
+-- Tabs
+-------------------------------------------------------------------------------
+-- New tab (vim calls them buffers)
+map('n', '<leader><leader>t', '<cmd>enew<CR>', { desc = 'new tab' })
+-- Previous & Next Tab
+map('n', '<leader><leader>h', function()
+    require('nvchad.tabufline').prev()
+end, { desc = 'previous tab' })
+map('n', '<leader><leader>l', function()
+    require('nvchad.tabufline').next()
+end, { desc = 'next tab' })
+map('n', '<leader>x', function()
+    require('nvchad.tabufline').close_buffer()
+end, { desc = 'close tab' })
+
+
 -- Editing
 -------------------------------------------------------------------------------
 -- Save file with Ctrl+S -- remap Cmd+S to Ctrl+S in iterm with "send vim text \<C-s> (with prefix slash)"
-map({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr>")
+map({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<cr>')
+-- Format file with conform
+map('n', '<leader>;', function()
+    require('conform').format { lsp_fallback = true }
+end, { desc = 'general format file' })
 
 -- Semicolon and comma at the end of lines
 map('i', ';;', '<Esc>A;<Esc>')
@@ -79,6 +105,8 @@ map('n', '<leader>,K', function()
 end, { desc = 'search key bindings' })
 -- Toggleable settings
 map('n', '<leader>,i', '<cmd>IBLToggle<CR>', { desc = 'toggle indentation guides' })
+map('n', '<leader>,n', '<cmd>set rnu!<CR>', { desc = 'toggle line numbers' })
+map('n', '<leader>,c', '<cmd>NvCheatsheet<CR>', { desc = 'toggle cheatsheet' })
 
 
 -- Telescope
