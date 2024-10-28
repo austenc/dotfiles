@@ -1,3 +1,6 @@
+-- UI (needs to be before lazy setup)
+ vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/"
+
 -- Keymaps and Config
 require('ac.keymaps')
 require('ac.options')
@@ -27,3 +30,8 @@ require('lazy').setup('ac.plugins', {
     -- automatically check for plugin updates
     checker = { enabled = true },
 })
+
+-- Load all base46 themes (needs to be after lazy setup)
+for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+  dofile(vim.g.base46_cache .. v)
+end
