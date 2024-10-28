@@ -27,4 +27,3 @@ require('lazy').setup('ac.plugins', {
     -- automatically check for plugin updates
     checker = { enabled = true },
 })
-
