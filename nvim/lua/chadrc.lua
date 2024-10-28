@@ -18,8 +18,7 @@ local logo = [[
  ⠻⣿⣿⣿⣿⡿⠛⠁⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣦⣿⣿⣿⣿⣿⣿⣿⠀
  ⠀⠈⠛⠛⠉⠀⠀⠀⠀⠀⠀⠀⠘⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀
  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⣿⣿⣿⣿⣿⣿⣿⠟⠋⠀⠀
-]]
-logo = '\n' .. logo .. "\n⚡️🧙  VS Code Has No Power Here!\n"
+]] .. "\n⚡️🧙  VS Code Has No Power Here!\n"
 
 
 M.base46 = {
@@ -65,7 +64,7 @@ M.nvdash = {
         { txt = "  Cheatsheet", keys = "ch", cmd = "NvCheatsheet" },
         { txt = "󱥚  Color Themes", keys = "th", cmd = ":lua require('nvchad.themes').open()" },
 
-      { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+      { txt = "─", hl = "NvDashAscii", no_gap = true, rep = true },
 
       {
         txt = function()
@@ -73,11 +72,11 @@ M.nvdash = {
           local ms = math.floor(stats.startuptime) .. " ms"
           return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
         end,
-        hl = "NvDashLazy",
+        hl = "NvDashAscii",
         no_gap = true,
       },
 
-      { txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+      { txt = "─", hl = "NvDashAscii", no_gap = true, rep = true },
     },
 }
 

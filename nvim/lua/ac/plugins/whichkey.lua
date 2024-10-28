@@ -2,8 +2,13 @@ return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
-    preset = 'helix',
+    preset = 'modern',
   },
+  icons = {
+      rules = {
+        { pattern = 'keyboard', icon = '⌨', color = 'blue' },
+      },
+    },
   keys = {
     {
       "<leader>,wk",
