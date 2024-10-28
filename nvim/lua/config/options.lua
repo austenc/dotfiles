@@ -4,3 +4,11 @@
 vim.g.root_spec = {
   "cwd",
 }
+
+local opt = vim.opt
+
+-- Default to four spaces
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
