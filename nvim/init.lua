@@ -1,28 +1,37 @@
--- Lazy.nvim - The Package Manager
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+vim.g.mapleader = " "
+
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
+if not vim.uv.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
 end
+
 vim.opt.rtp:prepend(lazypath)
 
--- if vim.g.vscode then
-    -- Make Shift + Arrow keys work with Visual mode as normal selections
-    vim.keymap.set('n', '<S-Up>', 'v<Up>', { remap = false, silent = true })
-    vim.keymap.set('x', '<S-Up>', '<Up>', { remap = false, silent = true })
-    vim.keymap.set('n', '<S-Down>', 'v<Down>', { remap = false, silent = true })
-    vim.keymap.set('x', '<S-Down>', '<Down>', { remap = false, silent = true })
-    vim.keymap.set('n', '<S-Left>', 'v<Left>', { remap = false, silent = true })
-    vim.keymap.set('x', '<S-Left>', '<Left>', { remap = false, silent = true })
-    vim.keymap.set('n', '<S-Right>', 'v<Right>', { remap = false, silent = true })
-    vim.keymap.set('x', '<S-Right>', '<Right>', { remap = false, silent = true })
+local lazy_config = require "configs.lazy"
 
--- end
+-- load plugins
+require("lazy").setup({
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+  },
 
--- Normal Neovim config
+  { import = "plugins" },
+}, lazy_config)
+
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
+
+require "options"
+require "nvchad.autocmds"
+
+vim.schedule(function()
+  require "mappings"
+end)
