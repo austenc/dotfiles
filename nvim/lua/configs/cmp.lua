@@ -2,8 +2,6 @@ local cmp = require 'cmp'
 
 return {
     mapping = cmp.mapping.preset.insert({
-        ['<C-i>'] = cmp.select_next_item(),
-
         ["<Down>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
