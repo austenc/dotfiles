@@ -9,12 +9,9 @@ local logo = "\n"
 ⢴⢯⡺⣕⠏⠉⠘⢮⢪⢮⣪⢫⢦⡀⠀⡎⣪⠱⡱⡑
 ⠀⠙⠊⠀⠀⠀⠀⠀⠑⢣⡳⣹⢪⡝⣳⠸⡔⢝⢌⢇
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⣕⢝⡮⡪⡪⡱⡱⠑
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠱⠝⠬⠊⠈⠀   { action = "LazyExtras",                                     desc = " Lazy Extras",     icon = " ", key = "x" },
-          { action = "Lazy",                                           desc = " Lazy",            icon = "󰒲 ", key = "l" },
-          { action = function() vim.api.nvim_input("<cmd>qa<cr>") end, desc = " Quit",            icon = " ", key = "q" },
-        },⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠱⠝⠬⠊⠈⠀   
 ]]
-  .. "\n⚡️🧙  VS Code Has No Power Here!"
+  .. "⚡️🧙  VS Code Has No Power Here!\n"
 
 return {
   "nvimdev/dashboard-nvim",
