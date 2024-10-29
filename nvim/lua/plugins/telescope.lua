@@ -19,5 +19,10 @@ return {
       function() require('telescope.builtin').keymaps() end,
       desc = 'Keyboard Shortcuts',
     },
+    {
+      '<leader>p',
+      '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>',
+      desc = 'Switch Buffer',
+    },
   },
 }
