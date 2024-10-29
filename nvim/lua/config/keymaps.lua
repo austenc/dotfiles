@@ -15,10 +15,10 @@ unmap('n', '<leader>xl')
 unmap('n', '<leader>xL')
 unmap('n', '<leader>xq')
 unmap('n', '<leader>xQ')
--- unmap('n', '<leader>xt')
--- unmap('n', '<leader>xT')
 unmap('n', '<leader>xx')
 unmap('n', '<leader>xX')
+-- unmap('n', '<leader>xt')
+-- unmap('n', '<leader>xT')
 
 -- Window Management
 -------------------------------------------------------------------------------
