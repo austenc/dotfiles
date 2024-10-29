@@ -7,11 +7,24 @@ local unmap = vim.keymap.del
 -- Unmap some of the default keymaps for LazyVim
 -------------------------------------------------------------------------------
 unmap('n', '<leader>,')
+unmap('n', '<leader>K')
+unmap('n', '<leader>l')
+unmap('n', '<leader>L')
+-- Diagnostics/Quickfix defaults from LazyVim
+unmap('n', '<leader>xl')
+unmap('n', '<leader>xL')
+unmap('n', '<leader>xq')
+unmap('n', '<leader>xQ')
+-- unmap('n', '<leader>xt')
+-- unmap('n', '<leader>xT')
+unmap('n', '<leader>xx')
+unmap('n', '<leader>xX')
 
 -- Window Management
 -------------------------------------------------------------------------------
 map('n', '<Tab>', '<C-w>w') -- Cycle to next window
 map('n', '<S-Tab>', '<C-w>W') -- Cycle to previous window
+map('n', '<leader>x', LazyVim.ui.bufremove, { desc = 'Delete Buffer' })
 
 -- Editing
 -------------------------------------------------------------------------------
@@ -31,7 +44,7 @@ map('i', '<A-k>', '<Esc>:m .-2<CR>==gi', { silent = true, desc = 'move line up' 
 map('v', '<A-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'move line down' })
 map('v', '<A-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'move line up' })
 -- Jesse's big idea 💡 indent entire file correctly
-map('n', '<Leader>=', 'ggVG=', { desc = 'autoindent entire file' })
+map('n', '<Leader>=', 'ggVG=', { desc = 'Fix Indentation' })
 -- Keep visual selection when indenting
 map('x', '>', '>gv')
 map('x', '<', '<gv')

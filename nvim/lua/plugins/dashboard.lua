@@ -49,6 +49,18 @@ return {
           icon = ' ',
           key = 's',
         },
+        {
+          action = 'LazyExtras',
+          desc = ' Lazy Extras',
+          icon = ' ',
+          key = 'x',
+        },
+        {
+          action = function() vim.api.nvim_input '<cmd>qa<cr>' end,
+          desc = ' Quit',
+          icon = ' ',
+          key = 'q',
+        },
       },
     },
   },
