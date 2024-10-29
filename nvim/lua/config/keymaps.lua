@@ -19,7 +19,7 @@ map("n", "<S-Tab>", "<C-w>W") -- Cycle to previous window
 map({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr>")
 -- Format file with conform
 map("n", "<leader>;", function()
-  require("conform").format({ lsp_fallback = true })
+require("conform").format({ lsp_fallback = true })
 end, { desc = "general format file" })
 
 -- Semicolon and comma at the end of lines
@@ -48,8 +48,8 @@ map("i", "?", "?<C-g>u")
 -- Settings
 map("n", "<leader>,k", "<cmd>WhichKey <CR>", { desc = "keyboard shortcuts" })
 map("n", "<leader>,K", function()
-  vim.cmd("WhichKey " .. vim.fn.input("WhichKey: "))
-end, { desc = "search key bindings" })
+  vim.cmd("WhichKey " .. vim.fn.input("Search Keys: "))
+end, { desc = "Search Keymap" })
 -- Toggleable settings
 map("n", "<leader>,i", "<cmd>IBLToggle<CR>", { desc = "toggle indentation guides" })
 map("n", "<leader>,n", "<cmd>set rnu!<CR>", { desc = "toggle line numbers" })
