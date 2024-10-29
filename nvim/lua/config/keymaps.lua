@@ -62,3 +62,15 @@ map('n', '<leader>,K', function() vim.cmd('WhichKey ' .. vim.fn.input 'Search Ke
 -- Toggleable settings
 map('n', '<leader>,i', '<cmd>IBLToggle<CR>', { desc = 'toggle indentation guides' })
 map('n', '<leader>,n', '<cmd>set rnu!<CR>', { desc = 'toggle line numbers' })
+
+-- Terminal
+-------------------------------------------------------------------------------
+map('t', '<esc>', [[<C-\><C-n>]])
+map('t', 'jk', [[<C-\><C-n>]])
+map('t', '<C-h>', [[<Cmd>wincmd h<CR>]])
+map('t', '<C-j>', [[<Cmd>wincmd j<CR>]])
+map('t', '<C-k>', [[<Cmd>wincmd k<CR>]])
+map('t', '<C-l>', [[<Cmd>wincmd l<CR>]])
+map('t', '<C-w>', [[<C-d>]])
+
+---
