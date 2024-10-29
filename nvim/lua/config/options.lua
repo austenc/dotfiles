@@ -4,6 +4,7 @@
 vim.g.root_spec = {
   'cwd',
 }
+vim.g.lazyvim_php_lsp = 'intelephense'
 
 -- local opt = vim.opt
 
