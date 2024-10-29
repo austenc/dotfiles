@@ -5,12 +5,16 @@ return {
     spec = {
       {
         mode = { 'n', 'v' },
-        { '<leader>,', group = 'Settings', icon = { icon = '', color = 'green' } },
+        { '<leader>,', group = 'settings', icon = { icon = '', color = 'green' } },
         { '<leader>x', group = 'Close File', icon = { icon = '󰱝 ', color = 'green' } },
       },
     },
     icons = {
       group = '',
+      rules = {
+        { pattern = 'fix indentation', icon = '' },
+        { pattern = 'format file', icon = '🧹' },
+      },
     },
   },
   keys = {
