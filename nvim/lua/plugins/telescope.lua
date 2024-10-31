@@ -1,9 +1,10 @@
+_G.include_vendor_in_search = true
+
 return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     'mollerhoj/telescope-recent-files.nvim',
   },
-  config = function() require('telescope').load_extension 'recent-files' end,
   config = {
     defaults = {
       sorting_strategy = 'ascending',
@@ -33,7 +34,7 @@ return {
             'node_modules/',
             'build/',
             'dist/',
-            'vendor/',
+            include_vendor_in_search and 'vendor/' or nil, -- Conditionally include 'vendor/'
             '%.git/',
             'storage/',
             '%.DS_Store',
@@ -43,6 +44,7 @@ return {
       end,
       desc = 'Fuzzy File Finder',
     },
+
     {
       '<leader>[',
       '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>',
