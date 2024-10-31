@@ -3,9 +3,7 @@ return {
   dependencies = {
     'mollerhoj/telescope-recent-files.nvim',
   },
-  config = function()
-    require("telescope").load_extension("recent-files")
-  end,
+  config = function() require('telescope').load_extension 'recent-files' end,
   config = {
     defaults = {
       sorting_strategy = 'ascending',
@@ -28,9 +26,22 @@ return {
     {
       '<leader>p',
       function()
-        require('telescope').extensions['recent-files'].recent_files({})
+        require('telescope').extensions['recent-files'].recent_files {
+          hidden = true,
+          no_ignore = true,
+          file_ignore_patterns = {
+            'node_modules/',
+            'build/',
+            'dist/',
+            'vendor/',
+            '%.git/',
+            'storage/',
+            '%.DS_Store',
+            '%.phpunit.result.cache',
+          },
+        }
       end,
-      desc = 'Fuzzy File Finder'
+      desc = 'Fuzzy File Finder',
     },
     {
       '<leader>[',
