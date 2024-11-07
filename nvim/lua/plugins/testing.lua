@@ -17,8 +17,14 @@ return {
         close_on_exit = false, -- Keeps the terminal open
         hidden = true,
         on_open = function(term)
-          -- Map Escape to close the terminal manually
+          -- Mapping to close the terminal manually
+          vim.cmd("startinsert!")
           vim.api.nvim_buf_set_keymap(term.bufnr, 't', '<Esc>', '<cmd>close<CR>', { noremap = true, silent = true })
+          vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+        end,
+        -- Allow us to navigate the terminal output
+        on_exit = function(term)
+          vim.cmd("stopinsert")
         end,
       }
       test_term:toggle()
