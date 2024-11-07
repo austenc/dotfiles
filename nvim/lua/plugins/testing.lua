@@ -3,8 +3,11 @@ return {
   config = function()
     -- Function to create a dedicated floating terminal for tests
     local function run_in_test_term(cmd)
+      -- For debugging the command that is being run
+      -- print('Test command:', cmd)
       local test_term = require('toggleterm.terminal').Terminal:new {
-        cmd = cmd,
+        -- Remove the --colors flag from the command because `artisan test` passes it in already
+        cmd = cmd:gsub('%-%-colors', ''),
         direction = 'float',
         float_opts = {
           border = 'curved',
@@ -24,7 +27,7 @@ return {
     -- Configure vim-test to use this isolated test terminal strategy
     vim.g['test#custom_strategies'] = { floating_term = function(cmd) run_in_test_term(cmd) end }
     vim.g['test#strategy'] = 'floating_term'
-    vim.g['test#php#phpunit#executable'] = 'php artisan test' -- Adjust the path if necessary
+    vim.g['test#php#phpunit#executable'] = 'php artisan test'
   end,
 
   -- Key mappings for triggering tests
