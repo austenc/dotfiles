@@ -24,14 +24,15 @@ return {
     -- Configure vim-test to use this isolated test terminal strategy
     vim.g['test#custom_strategies'] = { floating_term = function(cmd) run_in_test_term(cmd) end }
     vim.g['test#strategy'] = 'floating_term'
+    vim.g['test#php#phpunit#executable'] = 'php artisan test' -- Adjust the path if necessary
   end,
 
   -- Key mappings for triggering tests
   keys = {
-    { '<Leader>kt', ':w<CR>:TestSuite<CR>' },
-    { '<Leader>kf', ':w<CR>:TestFile<CR>' },
-    { '<Leader>kp', ':w<CR>:TestLast<CR>' },
-    { '<Leader>kr', ':w<CR>:TestNearest<CR>' },
-    { '<Leader>kv', ':w<CR>:TestVisit<CR>' },
+    { '<Leader>kt', ':w<CR><cmd>TestSuite<CR>', desc = 'Run all Tests' },
+    { '<Leader>kf', ':w<CR><cmd>TestFile<CR>', desc = 'Run Tests in File' },
+    { '<Leader>kp', ':w<CR><cmd>TestLast<CR>', desc = 'Run Previous Test' },
+    { '<Leader>kr', ':w<CR><cmd>TestNearest<CR>', desc = 'Run Nearest Test' },
+    -- { '<Leader>kv', ':w<CR>:TestVisit<CR>', desc = 'Run Visit Test??' },
   },
 }
