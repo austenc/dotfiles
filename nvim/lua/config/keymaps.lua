@@ -19,6 +19,9 @@ unmap('n', '<leader>xx')
 unmap('n', '<leader>xX')
 -- unmap('n', '<leader>xt')
 -- unmap('n', '<leader>xT')
+-- Have to unmap this because for some reason toggleterm is mapping this to insert mode
+-- even though it says it only maps the open_mapping setting in normal mode 🤷
+unmap('i', '<leader>t')
 
 -- Window Management
 -------------------------------------------------------------------------------
