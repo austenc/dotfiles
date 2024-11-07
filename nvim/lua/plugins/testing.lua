@@ -13,19 +13,18 @@ return {
           border = 'curved',
           width = 120,
           height = 14,
+          row = 14,
         },
         close_on_exit = false, -- Keeps the terminal open
         hidden = true,
         on_open = function(term)
           -- Mapping to close the terminal manually
-          vim.cmd("startinsert!")
+          vim.cmd 'startinsert!'
           vim.api.nvim_buf_set_keymap(term.bufnr, 't', '<Esc>', '<cmd>close<CR>', { noremap = true, silent = true })
-          vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+          vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
         end,
         -- Allow us to navigate the terminal output
-        on_exit = function(term)
-          vim.cmd("stopinsert")
-        end,
+        on_exit = function(term) vim.cmd 'stopinsert' end,
       }
       test_term:toggle()
     end
@@ -38,10 +37,10 @@ return {
 
   -- Key mappings for triggering tests
   keys = {
-    { '<Leader>kt', ':w<CR><cmd>TestSuite<CR>', desc = 'Run all Tests' },
-    { '<Leader>kf', ':w<CR><cmd>TestFile<CR>', desc = 'Run Tests in File' },
-    { '<Leader>kp', ':w<CR><cmd>TestLast<CR>', desc = 'Run Previous Test' },
-    { '<Leader>kr', ':w<CR><cmd>TestNearest<CR>', desc = 'Run Nearest Test' },
+    { '<Leader>kt', '<cmd>w<CR><cmd>TestSuite<CR>', desc = 'Run all Tests' },
+    { '<Leader>kf', '<cmd>w<CR><cmd>TestFile<CR>', desc = 'Run Tests in File' },
+    { '<Leader>kp', '<cmd>w<CR><cmd>TestLast<CR>', desc = 'Run Previous Test' },
+    { '<Leader>kr', 'zt<cmd>w<CR><cmd>TestNearest<CR>', desc = 'Run Nearest Test' },
     -- { '<Leader>kv', ':w<CR>:TestVisit<CR>', desc = 'Run Visit Test??' },
   },
 }
