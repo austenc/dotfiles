@@ -9,4 +9,11 @@ return {
     { 'stevearc/dressing.nvim', opts = {} }, -- Optional: Improves `vim.ui.select`
   },
   config = true,
+  opts = {
+    display = {
+      diff = {
+        provider = 'mini_diff',
+      },
+    },
+  },
 }
