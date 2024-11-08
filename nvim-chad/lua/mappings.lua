@@ -45,7 +45,6 @@ map('n', '<C-i>', '<C-i>', { silent = true })
 -- Swap between previously active file
 map('n', '<Leader>p', '<c-^>', { desc = 'swap to previous file' })
 
-
 -- Tabs
 -------------------------------------------------------------------------------
 -- New tab (vim calls them buffers)
@@ -60,7 +59,6 @@ end, { desc = 'next tab' })
 map('n', '<leader>x', function()
     require('nvchad.tabufline').close_buffer()
 end, { desc = 'close tab' })
-
 
 -- Editing
 -------------------------------------------------------------------------------
@@ -79,8 +77,8 @@ map('n', '<A-j>', ':m .+1<CR>==', { silent = true, desc = 'move line down' })
 map('n', '<A-k>', ':m .-2<CR>==', { silent = true, desc = 'move line up' })
 map('i', '<A-j>', '<Esc>:m .+1<CR>==gi', { silent = true, desc = 'move line down' })
 map('i', '<A-k>', '<Esc>:m .-2<CR>==gi', { silent = true, desc = 'move line up' })
-map('v', '<A-j>', ':m \'>+1<CR>gv=gv', { silent = true, desc = 'move line down' })
-map('v', '<A-k>', ':m \'<-2<CR>gv=gv', { silent = true, desc = 'move line up' })
+map('v', '<A-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'move line down' })
+map('v', '<A-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'move line up' })
 -- Jesse's big idea 💡 indent entire file correctly
 map('n', '<Leader>=', 'ggVG=', { desc = 'autoindent entire file' })
 -- Keep visual selection when indenting
@@ -91,7 +89,6 @@ map('i', ',', ',<C-g>u')
 map('i', '.', '.<C-g>u')
 map('i', '!', '!<C-g>u')
 map('i', '?', '?<C-g>u')
-
 
 -- Configuration & Settings
 -------------------------------------------------------------------------------
@@ -109,13 +106,12 @@ map('n', '<leader>,n', '<cmd>set rnu!<CR>', { desc = 'toggle line numbers' })
 map('n', '<leader>,c', '<cmd>NvCheatsheet<CR>', { desc = 'toggle cheatsheet' })
 -- Toggle line height with <leader>kk
 map('n', '<leader>kk', function()
-  if vim.o.linespace == 0 then
-    vim.o.linespace = 6  -- Adjust this value for 1.5x (6) or 2.0x (10)
-  else
-    vim.o.linespace = 0  -- Normal line height
-  end
-end, { desc = "Toggle line height" })
-
+    if vim.o.linespace == 0 then
+        vim.o.linespace = 6 -- Adjust this value for 1.5x (6) or 2.0x (10)
+    else
+        vim.o.linespace = 0 -- Normal line height
+    end
+end, { desc = 'Toggle line height' })
 
 -- Telescope
 -------------------------------------------------------------------------------
@@ -131,7 +127,6 @@ end, { desc = 'telescope commands' })
 map('n', '<leader>?', function()
     require('telescope.builtin').help_tags()
 end, { desc = 'telescope help' })
-
 
 -- Terminal
 -------------------------------------------------------------------------------

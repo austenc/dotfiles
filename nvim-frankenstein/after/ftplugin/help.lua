@@ -1,5 +1,5 @@
 -- Fullscreen the help window
-vim.cmd.wincmd 'o'
+vim.cmd.wincmd('o')
 
 -- Enter to go into help doc link
 vim.keymap.set('n', '<CR>', '<C-]>', { buffer = true })
