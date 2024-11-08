@@ -68,7 +68,7 @@ map('n', '<leader>,n', '<cmd>set rnu!<CR>', { desc = 'toggle line numbers' })
 map(
   'n',
   '<leader>,v',
-  [[:lua _G.include_vendor_in_search = not _G.include_vendor_in_search<CR>]],
+  [[:lua _G.exclude_vendor_in_search = not _G.exclude_vendor_in_search<CR>]],
   { desc = 'Toggle vendor files', noremap = true, silent = true }
 )
 

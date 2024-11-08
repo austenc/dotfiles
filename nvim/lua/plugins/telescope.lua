@@ -1,4 +1,4 @@
-_G.include_vendor_in_search = true
+_G.exclude_vendor_in_search = true
 
 return {
   'nvim-telescope/telescope.nvim',
@@ -34,7 +34,7 @@ return {
             'node_modules/',
             'build/',
             'dist/',
-            include_vendor_in_search and 'vendor/' or nil, -- Conditionally include 'vendor/'
+            exclude_vendor_in_search and 'vendor/' or nil, -- Conditionally include 'vendor/'
             '%.git/',
             'storage/',
             '%.DS_Store',
