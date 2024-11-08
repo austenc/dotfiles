@@ -8,7 +8,7 @@ return {
       formatters_by_ft = {
         php = { 'pint' },
       },
-    }
+    },
   },
   {
     -- Add a Treesitter parser for Laravel Blade to provide Blade syntax highlighting.
@@ -39,33 +39,29 @@ return {
     end,
   },
   {
-    "L3MON4D3/LuaSnip",
+    'L3MON4D3/LuaSnip',
     opts = function(_, opts)
-      local ls = require("luasnip")
+      local ls = require 'luasnip'
       local s = ls.snippet
-      local fmt = require("luasnip.extras.fmt").fmt
+      local fmt = require('luasnip.extras.fmt').fmt
       local i = ls.insert_node
 
-      ls.add_snippets("blade", {
+      ls.add_snippets('all', {
         -- Auto-pad `{{ ... }}`
-        s({ trig = "{{", snippetType = "autosnippet" }, fmt("{{{{ {} ", { i(0) })),
+        s({ trig = '{{', snippetType = 'autosnippet' }, fmt('{{{{ {} ', { i(0) })),
 
         -- Auto-pad blade stuff
-        s({ trig = "{!", snippetType = "autosnippet" }, fmt("{{!! {} !!", { i(0) })),
-        s({ trig = "{-", snippetType = "autosnippet" }, fmt("{{{{-- {} --}}", { i(0) })),
-      })
-
-      -- If you want these in all files, you can add them to "all" as well
-      ls.add_snippets("all", {
+        s({ trig = '{!', snippetType = 'autosnippet' }, fmt('{{!! {} !!', { i(0) })),
+        s({ trig = '{-', snippetType = 'autosnippet' }, fmt('{{{{-- {} --}}', { i(0) })),
         -- Auto-pad antlers stuff
-        s({ trig = "{#", snippetType = "autosnippet" }, fmt("{{{{# {} #}}", { i(0) })),
+        s({ trig = '{#', snippetType = 'autosnippet' }, fmt('{{{{# {} #}}', { i(0) })),
       })
 
       -- Enable autosnippets
-      ls.setup({
+      ls.setup {
         enable_autosnippets = true,
-        store_selection_keys = "<Tab>",
-      })
+        store_selection_keys = '<Tab>',
+      }
 
       return opts
     end,
