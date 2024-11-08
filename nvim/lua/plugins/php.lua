@@ -58,10 +58,10 @@ return {
       })
 
       -- Enable autosnippets
-      ls.setup {
-        enable_autosnippets = true,
-        store_selection_keys = '<Tab>',
-      }
+      -- ls.setup {
+      --   enable_autosnippets = true,
+      --   store_selection_keys = '<Tab>',
+      -- }
 
       return opts
     end,
