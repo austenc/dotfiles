@@ -6,10 +6,10 @@ vim.g.root_spec = {
 }
 vim.g.lazyvim_php_lsp = 'intelephense'
 
--- local opt = vim.opt
+local opt = vim.opt
 
 -- Default to four spaces
--- opt.tabstop = 4
--- opt.softtabstop = 4
--- opt.shiftwidth = 4
--- opt.expandtab = true
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true

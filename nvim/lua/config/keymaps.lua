@@ -56,6 +56,7 @@ map('i', ',', ',<C-g>u')
 map('i', '.', '.<C-g>u')
 map('i', '!', '!<C-g>u')
 map('i', '?', '?<C-g>u')
+map('n', '<leader>ff', ':Telescope file_browser path=%:p:h select_buffer=true<CR>')
 
 -- Configuration & Settings
 -------------------------------------------------------------------------------
