@@ -23,6 +23,15 @@ unmap('n', '<leader>xX')
 -- even though it says it only maps the open_mapping setting in normal mode 🤷
 unmap('i', '<leader>t')
 
+-- AI tools
+-------------------------------------------------------------------------------
+map('n', '<C-a>', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true })
+map('v', '<C-a>', '<cmd>CodeCompanionActions<cr>', { noremap = true, silent = true })
+map('n', '<leader>at', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true })
+map('v', '<leader>at', '<cmd>CodeCompanionChat Toggle<cr>', { noremap = true, silent = true })
+map('v', '<leader>ac', '<cmd>CodeCompanionChat Add<cr>', { noremap = true, silent = true })
+map('n', '<leader><leader>', '<cmd>CodeCompanion<cr>', { noremap = true, silent = true })
+
 -- Window Management
 -------------------------------------------------------------------------------
 map('n', '<Tab>', '<C-w>w') -- Cycle to next window
