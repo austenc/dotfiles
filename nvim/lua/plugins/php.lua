@@ -38,4 +38,32 @@ return {
       }
     end,
   },
+  {
+    'L3MON4D3/LuaSnip',
+    opts = function(_, opts)
+      local ls = require 'luasnip'
+      local s = ls.snippet
+      local fmt = require('luasnip.extras.fmt').fmt
+      local i = ls.insert_node
+
+      ls.add_snippets('all', {
+        -- Auto-pad `{{ ... }}`
+        s({ trig = '{{', snippetType = 'autosnippet' }, fmt('{{{{ {} ', { i(0) })),
+
+        -- Auto-pad blade stuff
+        s({ trig = '{!', snippetType = 'autosnippet' }, fmt('{{!! {} !!', { i(0) })),
+        s({ trig = '{-', snippetType = 'autosnippet' }, fmt('{{{{-- {} --}}', { i(0) })),
+        -- Auto-pad antlers stuff
+        s({ trig = '{#', snippetType = 'autosnippet' }, fmt('{{{{# {} #}}', { i(0) })),
+      })
+
+      -- Enable autosnippets
+      -- ls.setup {
+      --   enable_autosnippets = true,
+      --   store_selection_keys = '<Tab>',
+      -- }
+
+      return opts
+    end,
+  },
 }
