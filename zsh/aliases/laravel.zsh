@@ -74,11 +74,20 @@ EOF
         testFile="vendor/hdmaster/core/tests/Feature/$file"
     fi
 
-    if [ -z "$test" ]; then
-        command="artisan test $testFile --parallel --stop-on-error --stop-on-failure"
+    # Check if artisan exists in the current directory
+    if [ -f "$(pwd)/artisan" ]; then
+        testCommand="artisan test"
+        parallelFlag="--parallel"
     else
-        if grep -q "$test" "$testFile"; then
-            command="artisan test $testFile --parallel --stop-on-error --stop-on-failure --filter '^.*::${test:-}( .*)?$'"
+        testCommand="phpunit"
+        parallelFlag=""
+    fi
+
+    if [ -z "$test" ]; then
+        command="$testCommand $testFile $parallelFlag --stop-on-error --stop-on-failure"
+    else
+        if [ -z "$testFile" ] || grep -q "$test" "$testFile"; then
+            command="$testCommand $testFile $parallelFlag --stop-on-error --stop-on-failure --filter '^.*::${test:-}( .*)?$'"
         else
             echo "Test not found in the file."
             return 1
