@@ -42,3 +42,41 @@ function gis() {
     local repo_url=`git remote get-url origin | sed -e 's/git@//' -e 's/.git//' -e 's/:/\//'`
     open "https://$repo_url/issues/new?title=${1:-}"
 }
+
+# Create a git worktree for a given branch name (run from the target repo)
+function gwt() {
+    if [[ -z "$1" ]]; then
+        echo "Usage: gwt <branch-name>"
+        return 1
+    fi
+
+    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "❌ Not inside a git repository"
+        return 1
+    fi
+
+    local branch="$1"
+    local worktree_dir="${HOME}/Code/worktrees/$branch"
+
+    if [[ -d "$worktree_dir" ]]; then
+        echo "⚠️ Worktree already exists: $worktree_dir"
+        cd "$worktree_dir" || return 1
+        return 0
+    fi
+
+    mkdir -p "${worktree_dir:h}" || return 1
+
+    echo "📦 Adding worktree for branch: $branch"
+    if git show-ref --verify --quiet "refs/heads/$branch"; then
+        echo "🌿 Local branch exists"
+        git worktree add "$worktree_dir" "$branch" || return 1
+    elif git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+        echo "🔗 Remote branch exists, tracking it"
+        git worktree add --track -b "$branch" "$worktree_dir" "origin/$branch" || return 1
+    else
+        echo "🌱 Creating new branch from origin/develop: $branch"
+        git worktree add -b "$branch" "$worktree_dir" origin/develop || return 1
+    fi
+
+    cd "$worktree_dir" || { echo "❌ Failed to cd into $worktree_dir"; return 1; }
+}
