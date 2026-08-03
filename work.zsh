@@ -50,7 +50,6 @@ If the issue cannot be found, Linear MCP is unavailable, or the issue has no Git
     agent_output="$(agent \
         --print \
         --mode=ask \
-        --approve-mcps \
         --output-format text \
         "$prompt"
     )"
