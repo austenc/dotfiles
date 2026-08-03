@@ -1,5 +1,11 @@
 alias cursor='code'
 
+
+function npm-cleanup() {
+    find . -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;
+}
+
+
 function upgrade-tmu() {
     # Only do this if we're not already on the branch
     if [[ $(git branch --show-current) != "tmu-828-launch-core-version-20" ]]; then

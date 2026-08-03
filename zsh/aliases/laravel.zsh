@@ -13,11 +13,6 @@ composer-link() {
     composer config repositories.local '{"type": "path", "url": "'$1'"}' --file composer.json
 }
 
-# Control multiple TMU instances
-function tower() {
-    php ~/Code/tower/artisan tower:$@
-}
-
 # Start a new laravel project with austencam/cable
 function newapp() {
     composer create-project --prefer-dist laravel/laravel ${1:-newapp}
