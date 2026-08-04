@@ -7,6 +7,8 @@ function work() {
     local agent_output
     local agent_status
     local prompt
+    local code_root
+    local workspace
 
     agent_path="$(command -v agent 2>/dev/null)"
 
@@ -17,6 +19,19 @@ function work() {
     fi
 
     print "Cursor Agent CLI found: $agent_path"
+
+    code_root="$(cd "$HOME/Code" 2>/dev/null && pwd -P)"
+    workspace="$(pwd -P)"
+
+    if [[ -z "$code_root" ]]; then
+        print -u2 "work: $HOME/Code does not exist or cannot be accessed."
+        return 77
+    fi
+
+    if [[ "$workspace" != "$code_root" && "$workspace" != "$code_root/"* ]]; then
+        print -u2 "work: refusing to trust a workspace outside $code_root."
+        return 77
+    fi
 
     if (( $# != 1 )); then
         print -u2 "Usage: work <issue>"
@@ -50,6 +65,8 @@ If the issue cannot be found, Linear MCP is unavailable, or the issue has no Git
     agent_output="$(agent \
         --print \
         --mode=ask \
+        --workspace "$workspace" \
+        --trust \
         --output-format text \
         "$prompt"
     )"
