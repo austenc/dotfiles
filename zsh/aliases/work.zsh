@@ -9,6 +9,9 @@ function work() {
     local prompt
     local code_root
     local workspace
+    local branch_name
+    local worktree_path
+    local desktop_prompt
 
     agent_path="$(command -v agent 2>/dev/null)"
 
@@ -88,5 +91,41 @@ If the issue cannot be found, Linear MCP is unavailable, or the issue has no Git
         return 1
     fi
 
-    print "Linear branch: $agent_output"
+    branch_name="$agent_output"
+    print "Linear branch: $branch_name"
+
+    if (( ! $+functions[gwt] )); then
+        print -u2 "work: gwt is unavailable; reload your Zsh configuration."
+        return 127
+    fi
+
+    gwt "$branch_name" || {
+        print -u2 "work: failed to create or enter the CORE worktree."
+        return 1
+    }
+
+    worktree_path="$(pwd -P)"
+
+    if ! command -v code >/dev/null 2>&1; then
+        print -u2 "work: the Cursor Desktop command ('code') is not available."
+        print -u2 "Worktree ready at: $worktree_path"
+        return 127
+    fi
+
+    code --new-window "$worktree_path" || {
+        print -u2 "work: failed to open the worktree in Cursor Desktop."
+        return 1
+    }
+
+    desktop_prompt="Use Linear MCP to retrieve $issue_key and read its full description.
+Confirm this worktree is on Linear's branch '$branch_name'.
+Then inspect the repository, propose an implementation plan, and begin the issue."
+
+    if command -v pbcopy >/dev/null 2>&1; then
+        print -rn -- "$desktop_prompt" | pbcopy
+        print "Agent prompt copied to the clipboard."
+    else
+        print "Start a new Agent chat with:"
+        print "$desktop_prompt"
+    fi
 }
