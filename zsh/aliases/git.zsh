@@ -51,7 +51,7 @@ function gwt() {
     fi
 
     if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        echo "❌ Not inside a git repository"
+        echo "[error] Not inside a git repository"
         return 1
     fi
 
@@ -59,24 +59,24 @@ function gwt() {
     local worktree_dir="${HOME}/Code/worktrees/$branch"
 
     if [[ -d "$worktree_dir" ]]; then
-        echo "⚠️ Worktree already exists: $worktree_dir"
+        echo "[worktree] Already exists: $worktree_dir"
         cd "$worktree_dir" || return 1
         return 0
     fi
 
     mkdir -p "${worktree_dir:h}" || return 1
 
-    echo "📦 Adding worktree for branch: $branch"
+    echo "[worktree] Adding branch: $branch"
     if git show-ref --verify --quiet "refs/heads/$branch"; then
-        echo "🌿 Local branch exists"
+        echo "[git] Using local branch"
         git worktree add "$worktree_dir" "$branch" || return 1
     elif git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
-        echo "🔗 Remote branch exists, tracking it"
+        echo "[git] Tracking remote branch"
         git worktree add --track -b "$branch" "$worktree_dir" "origin/$branch" || return 1
     else
-        echo "🌱 Creating new branch from origin/develop: $branch"
+        echo "[git] Creating branch from origin/develop"
         git worktree add -b "$branch" "$worktree_dir" origin/develop || return 1
     fi
 
-    cd "$worktree_dir" || { echo "❌ Failed to cd into $worktree_dir"; return 1; }
+    cd "$worktree_dir" || { echo "[error] Failed to cd into $worktree_dir"; return 1; }
 }

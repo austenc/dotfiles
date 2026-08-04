@@ -47,7 +47,7 @@ function tmu() {
     fi
 
     issue_key="TMU-$issue_number"
-    print "⏳ Looking up $issue_key in Linear..."
+    print "[linear] Looking up $issue_key..."
 
     if ! agent --workspace "$workspace" mcp list-tools linear >/dev/null 2>&1; then
         print -u2 "tmu: Linear MCP ('linear') is not configured or authenticated."
@@ -87,7 +87,7 @@ If the issue cannot be found, Linear MCP is unavailable, or the issue has no Git
     fi
 
     branch_name="$agent_output"
-    print "✅ Linear branch: $branch_name"
+    print "[linear] Branch: $branch_name"
 
     if (( ! $+functions[gwt] )); then
         print -u2 "tmu: gwt is unavailable; reload your Zsh configuration."
@@ -99,7 +99,7 @@ If the issue cannot be found, Linear MCP is unavailable, or the issue has no Git
         return 1
     }
 
-    print "⏳ Preparing CORE worktree..."
+    print "[worktree] Preparing CORE worktree..."
 
     gwt "$branch_name" || {
         print -u2 "tmu: failed to create or enter the CORE worktree."
@@ -119,7 +119,7 @@ If the issue cannot be found, Linear MCP is unavailable, or the issue has no Git
         return 1
     }
 
-    print "✅ Opened $worktree_path in Cursor."
+    print "[cursor] Opened $worktree_path."
 
     desktop_prompt="Use Linear MCP to retrieve $issue_key and read its full description.
 Confirm this worktree is on Linear's branch '$branch_name'.
@@ -127,7 +127,7 @@ Then inspect the repository, propose an implementation plan, and begin the issue
 
     if command -v pbcopy >/dev/null 2>&1; then
         print -rn -- "$desktop_prompt" | pbcopy
-        print "✅ Agent prompt copied to the clipboard."
+        print "[prompt] Copied Agent prompt to the clipboard."
     else
         print "Start a new Agent chat with:"
         print "$desktop_prompt"
