@@ -7,7 +7,7 @@ function tmu() {
     local agent_output
     local agent_status
     local prompt
-    local code_root
+    local core_root
     local workspace
     local branch_name
     local worktree_path
@@ -23,18 +23,15 @@ function tmu() {
 
     print "Cursor Agent CLI found: $agent_path"
 
-    code_root="$(cd "$HOME/Code" 2>/dev/null && pwd -P)"
-    workspace="$(pwd -P)"
+    core_root="$(cd "$HOME/Code/bedrock/core" 2>/dev/null && pwd -P)"
 
-    if [[ -z "$code_root" ]]; then
-        print -u2 "tmu: $HOME/Code does not exist or cannot be accessed."
-        return 77
+    if [[ -z "$core_root" ]] ||
+        [[ "$(git -C "$core_root" rev-parse --show-toplevel 2>/dev/null)" != "$core_root" ]]; then
+        print -u2 "tmu: CORE repository is not available at $HOME/Code/bedrock/core."
+        return 66
     fi
 
-    if [[ "$workspace" != "$code_root" && "$workspace" != "$code_root/"* ]]; then
-        print -u2 "tmu: refusing to trust a workspace outside $code_root."
-        return 77
-    fi
+    workspace="$core_root"
 
     if (( $# != 1 )); then
         print -u2 "Usage: TMU <issue>"
@@ -54,7 +51,7 @@ function tmu() {
     issue_key="TMU-$issue_number"
     print "Issue: $issue_key"
 
-    if ! agent mcp list-tools linear >/dev/null 2>&1; then
+    if ! agent --workspace "$workspace" mcp list-tools linear >/dev/null 2>&1; then
         print -u2 "tmu: Linear MCP ('linear') is not configured or authenticated."
         print -u2 "Configure it with: https://mcp.linear.app/mcp"
         return 69
@@ -98,6 +95,11 @@ If the issue cannot be found, Linear MCP is unavailable, or the issue has no Git
         print -u2 "tmu: gwt is unavailable; reload your Zsh configuration."
         return 127
     fi
+
+    cd "$core_root" || {
+        print -u2 "tmu: failed to enter the CORE repository."
+        return 1
+    }
 
     gwt "$branch_name" || {
         print -u2 "tmu: failed to create or enter the CORE worktree."
