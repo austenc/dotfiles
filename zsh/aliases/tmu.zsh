@@ -37,8 +37,8 @@ function tmu() {
     fi
 
     if (( $# != 1 )); then
-        print -u2 "Usage: tmu <issue>"
-        print -u2 "Example: tmu 1234"
+        print -u2 "Usage: TMU <issue>"
+        print -u2 "Examples: TMU 1234, TMU TMU-1234"
         return 64
     fi
 
@@ -128,4 +128,9 @@ Then inspect the repository, propose an implementation plan, and begin the issue
         print "Start a new Agent chat with:"
         print "$desktop_prompt"
     fi
+}
+
+# Uppercase entry point matching the TMU product name.
+function TMU() {
+    tmu "$@"
 }
