@@ -51,4 +51,4 @@ These are not secrets, but they are identifying / work-specific:
 
 - TMU skills mention local paths (`/Users/austen/Code/...`), Flare project id `1790`, GitHub org `hdmastr`, and Headmaster/TMU workflow details.
 
-The python, product-name copyright, and PR-heading rules exist both as files here and as Cursor Settings user rules (account-synced). They may apply twice until you drop one copy. Git commit / PR creation protocols that show up in agent context were not stored as Settings files on this machine, so they are not in this folder yet.
+User-level agent rules live only as files in `rules/`. Git commit / PR creation protocols that show up in agent context were not stored as Settings files on this machine, so they are not in this folder yet.
