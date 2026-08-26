@@ -1,0 +1,7 @@
+---
+description: Python command conventions
+alwaysApply: true
+---
+
+- When running python commands, use `python3` instead of `python`
+- When running python commands, you must first activate the environment: `source .venv/bin/activate`

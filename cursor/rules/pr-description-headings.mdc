@@ -1,0 +1,11 @@
+---
+description: GitHub pull request body headings
+alwaysApply: true
+---
+
+When creating GitHub pull request bodies (including via `gh pr create`), use these section headings:
+
+- `## Summary`
+- `## Testing This PR`
+
+Do not use `## Test plan` or `## Test Plan`. Prefer `## Testing This PR` whenever a testing/checklist section is included.

@@ -1,0 +1,21 @@
+{
+    "mcpServers": {
+        "alpaca": {
+            "command": "/Users/austen/Code/robotrader/.venv/bin/python",
+            "args": [
+                "/Users/austen/Code/robotrader/alpaca_mcp_server.py"
+            ],
+            "env": {
+                "ALPACA_API_KEY": "YOUR_ALPACA_API_KEY",
+                "ALPACA_SECRET_KEY": "YOUR_ALPACA_SECRET_KEY",
+                "ALPACA_PAPER_TRADE": "true"
+            }
+        },
+        "linear": {
+            "url": "https://mcp.linear.app/mcp"
+        },
+        "flare": {
+            "url": "https://flareapp.io/mcp"
+        }
+    }
+}

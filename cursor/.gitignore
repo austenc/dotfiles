@@ -1,0 +1,2 @@
+# Live MCP config often contains API keys. Keep mcp.json.example in git instead.
+mcp.json

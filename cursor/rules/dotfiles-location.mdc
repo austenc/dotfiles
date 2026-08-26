@@ -1,0 +1,19 @@
+---
+description: Personal Cursor skills and user-level agent rules live in the dotfiles repo
+alwaysApply: true
+---
+
+# Global Cursor skills and rules
+
+Personal (user-level) skills and agent rules are versioned in `~/Code/dotfiles/cursor/` and symlinked to the paths Cursor actually reads:
+
+| Kind | Write here | Cursor also sees |
+| --- | --- | --- |
+| Personal skill | `~/Code/dotfiles/cursor/skills/<name>/SKILL.md` | `~/.cursor/skills` (symlink) |
+| User-level rule | `~/Code/dotfiles/cursor/rules/<name>.mdc` | `~/.cursor/rules` (symlink) |
+
+When creating or updating a **personal/global** skill or user-level rule, write it in those dotfiles paths. Writing through `~/.cursor/skills` or `~/.cursor/rules` is the same files because of the symlink — do not create a second copy outside the repo.
+
+Project skills and project rules still belong in the current repository (`.cursor/skills/`, `.cursor/rules/`). Never write into `~/.cursor/skills-cursor/` (Cursor-managed).
+
+The symlink is the reload. New files are live immediately. Re-run `~/Code/dotfiles/cursor/link.zsh` only if a link is missing or was replaced by a real directory.

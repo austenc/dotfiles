@@ -28,4 +28,7 @@ if [ ! -L ~/.vimrc ]; then
     echo "\033[1;32m🔗  Created symbolic link for .vimrc\033[0m"
 fi
 
+# Cursor skills and user-level agent rules live in this repo and are symlinked into place
+source ~/Code/dotfiles/cursor/link.zsh
+
 echo "\033[1;32m✅  Dotfiles installed! Open a new terminal and run 'p10k configure' to install fonts.\033[0m"
