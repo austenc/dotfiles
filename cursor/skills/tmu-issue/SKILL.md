@@ -62,7 +62,7 @@ Keep iterating with the user if requirements are ambiguous; do not invent produc
 
 ### 3b. UI screenshots (when applicable)
 
-When the work changes anything the user sees in the app — including Blade views, Livewire components, layouts, copy, flows, or other UI — capture browser screenshots and **embed them in this Cursor chat** so they actually render.
+When the work changes anything the user sees in the app — including Blade views, Livewire components, layouts, copy, flows, or other UI — capture browser screenshots and put them in **both** this Cursor chat **and** the GitHub PR description.
 
 **When to capture**
 
@@ -73,9 +73,9 @@ When the work changes anything the user sees in the app — including Blade view
 
 **Where they go**
 
-- **Only in this Cursor chat** (required). The user must see the images in the final reply.
+- **Cursor chat** (required). The user must see the images in the final reply.
+- **GitHub PR description** (required). Add a `## Screenshots` section and upload the files with `gh pr create` / `gh pr edit` `--attach` so they render on GitHub.
 - Do **not** write screenshots into the project tree (no `.cursor-tmp/`, no PNGs under the workspace, nothing to commit).
-- Do **not** add a Screenshots heading, “see chat”, or screenshot placeholders to the PR body.
 - Do **not** put screenshots in Linear.
 
 **Storage (outside the repo)**
@@ -112,14 +112,15 @@ Never use relative paths or `file://` URIs for chat embeds.
 3. Take screenshot(s) with the browser screenshot tool.
 4. Save/copy each shot into `~/.cursor/tmp/screenshots/` with a descriptive name.
 5. In the **final reply**, embed each image with the absolute-path Markdown pattern above (do not only describe them in text).
-6. Prefer the account that matches the feature (admin or `ACameron` when that is the right user). Do **not** put passwords in this skill, commits, PRs, or chat logs.
+6. When opening or updating the PR, attach the same files with `gh --attach` and reference those local paths under `## Screenshots` so GitHub rewrites them to uploaded asset URLs (see step 4). Requires `gh` 2.99+.
+7. Prefer the account that matches the feature (admin or `ACameron` when that is the right user). Do **not** put passwords in this skill, commits, PRs, or chat logs.
 
 **Auth (no secrets in the skill)**
 
 1. Prefer asking the user to log in once in the Cursor browser (Take Control / unlock, sign in, then hand control back). Reuse that session for the rest of the run.
 2. If local env vars for UI login already exist outside the skill (e.g. shell or gitignored env), the agent may use those — never invent or hardcode credentials here.
 3. Do not assume the user’s default-browser session is available to Cursor’s browser; cookies usually do not transfer.
-4. If login is blocked and the user is unavailable, say screenshots were skipped and continue — still do not add a Screenshots section to the PR.
+4. If login is blocked and the user is unavailable, say screenshots were skipped and continue — omit `## Screenshots` from the PR rather than leaving placeholders.
 
 ### 4. Open a draft PR into `develop`
 
@@ -157,9 +158,12 @@ Example: `TMU-123 | Add export button to reports`
 **PR body** should include:
 
 - Short summary of what changed
+- Screenshots of UI changes (when applicable — see 3b)
 - Testing This PR checklist
 
-Do **not** add a Linear heading, issue link section, Screenshots heading, “see chat” notes, or other screenshot/Linear boilerplate in the PR body — GitHub ↔ Linear linking is handled automatically via the branch name / integration. Screenshots belong only in Cursor chat (see 3b).
+Do **not** add a Linear heading, issue link section, “see chat” notes, or other Linear boilerplate in the PR body — GitHub ↔ Linear linking is handled automatically via the branch name / integration.
+
+For UI work, include `## Screenshots` with local image paths and pass those files to `--attach` so `gh` uploads them. Requires `gh` 2.99+.
 
 Example:
 
@@ -168,11 +172,17 @@ gh pr create --draft --base develop --title "TMU-123 | Add export button to repo
 ## Summary
 - <bullet points>
 
+## Screenshots
+![After](/Users/austen/.cursor/tmp/screenshots/export-button-after.png)
+
 ## Testing This PR
 - [ ] <checks>
 EOF
-)"
+)" \
+  --attach '/Users/austen/.cursor/tmp/screenshots/export-button-after.png#After'
 ```
+
+Skip `## Screenshots` and `--attach` when there are no UI screenshots.
 
 ### 5. Linear status
 
@@ -187,7 +197,6 @@ After the PR exists, give the user the PR URL.
 - Merging the PR
 - Force-pushing or rewriting shared history
 - Adding Cursor / AI attribution or watermarks anywhere on GitHub
-- Screenshots sections or chat references in PR descriptions
 - Writing screenshot files into the project workspace
 
 ## Iteration notes

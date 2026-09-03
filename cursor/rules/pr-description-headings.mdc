@@ -6,6 +6,7 @@ alwaysApply: true
 When creating GitHub pull request bodies (including via `gh pr create`), use these section headings:
 
 - `## Summary`
+- `## Screenshots` (when the PR has UI screenshots; upload with `gh --attach`)
 - `## Testing This PR`
 
 Do not use `## Test plan` or `## Test Plan`. Prefer `## Testing This PR` whenever a testing/checklist section is included.
