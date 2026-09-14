@@ -1,5 +1,5 @@
 ---
-name: art-director
+name: game-art-director
 description: Define a coherent visual direction and reusable art bible for a game, including shape, color, motion, materials, and UI. Use before asset production or when resolving inconsistent game artwork.
 ---
 
@@ -45,3 +45,9 @@ invariants + permitted variation + state/pose + export needs + anti-goals**.
 Use references to name visual properties rather than instructing a copy of
 another game's identity. If reference images are supplied, explain which
 properties to retain and which to reject.
+
+## Focused references
+
+When choosing visual references or checking handheld readability, read
+[the compendium](references/compendium.md). Select only the relevant entries;
+use their suggested experiments to inform this task, not to expand its scope.

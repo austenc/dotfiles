@@ -42,3 +42,9 @@ value → observed result** table, the highest-impact next adjustment, and any
 untested assumptions. If changing code, follow the project's conventions and
 report what was actually played or measured. Do not present universal timing
 presets as validated values for this game.
+
+## Focused references
+
+When diagnosing feedback or camera behavior, read
+[the compendium](references/compendium.md). Select only the relevant entries;
+use their suggested experiments to inform this task, not to expand its scope.
