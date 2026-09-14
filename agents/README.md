@@ -42,3 +42,22 @@ precedence over it.
 Editor settings, credentials, built-in skills, and session state stay outside
 this repo. Copy `mcp.json.example` to `~/.cursor/mcp.json` when needed and fill
 in secrets there; do not symlink live MCP configuration.
+
+## Small mobile game skills
+
+| Skill | Use for |
+| --- | --- |
+| `invent-game` | Explore 3–5 distinct mechanics and choose a small prototype |
+| `evaluate-game` | Score concepts or prototypes and choose the next evidence-gathering test |
+| `game-feel` | Tune control, timing, and feedback for the core action |
+| `art-director` | Define a reusable visual bible and asset brief |
+
+These skills are plain `SKILL.md` files with no agent-specific tools or runtime
+requirements. Keep `agents/skills/` as the canonical source in this dotfiles
+repo: the existing links already expose it to Codex and Cursor. To use the
+skills in a separate game repo, copy the desired skill folders into that
+project's `.agents/skills/`. Copy the game philosophy from the root
+[`AGENTS.md`](../AGENTS.md) into the game's own instructions as appropriate.
+
+Discovery locations: [Codex skills](https://developers.openai.com/codex/skills/)
+and [Cursor skills](https://cursor.com/docs/skills).
