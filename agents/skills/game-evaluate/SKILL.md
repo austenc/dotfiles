@@ -1,5 +1,5 @@
 ---
-name: evaluate-game
+name: game-evaluate
 description: Evaluate or compare game concepts and prototypes for mechanical promise, mobile suitability, and small scope; recommend prototype, revise, or shelve.
 ---
 
@@ -43,3 +43,9 @@ player five seconds without explanation, then ask them to act and predict the
 result; remove unlocks and observe whether they voluntarily retry. Test on a
 phone when judging thumb comfort or responsiveness. If only a written concept
 exists, identify what the prototype must establish before claiming validation.
+
+## Focused references
+
+When choosing review questions or a playtest method, read
+[the compendium](references/compendium.md). Select only the relevant entries;
+use their suggested experiments to inform this task, not to expand its scope.

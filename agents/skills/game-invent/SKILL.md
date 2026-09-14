@@ -1,6 +1,6 @@
 ---
-name: invent-game
-description: Invent distinct small mobile game mechanics when asked to brainstorm game ideas or explore a new core loop. Use evaluate-game to assess an existing concept.
+name: game-invent
+description: Invent distinct small mobile game mechanics when asked to brainstorm game ideas or explore a new core loop. Use game-evaluate to assess an existing concept.
 ---
 
 # Invent game
@@ -43,4 +43,10 @@ without producing an interesting tradeoff.
 
 End with a recommended first prototype, its biggest uncertainty, and why it
 has the best ratio of interesting decisions to implementation effort. Suggest
-`evaluate-game` for deeper comparison; do not expand into a production plan.
+`game-evaluate` for deeper comparison; do not expand into a production plan.
+
+## Focused references
+
+When exploring constrained inputs, emergent rules, or prototype scope, read
+[the compendium](references/compendium.md). Select only the relevant entries;
+use their suggested experiments to inform this task, not to expand its scope.

@@ -47,10 +47,10 @@ in secrets there; do not symlink live MCP configuration.
 
 | Skill | Use for |
 | --- | --- |
-| `invent-game` | Explore 3–5 distinct mechanics and choose a small prototype |
-| `evaluate-game` | Score concepts or prototypes and choose the next evidence-gathering test |
+| `game-invent` | Explore 3–5 distinct mechanics and choose a small prototype |
+| `game-evaluate` | Score concepts or prototypes and choose the next evidence-gathering test |
 | `game-feel` | Tune control, timing, and feedback for the core action |
-| `art-director` | Define a reusable visual bible and asset brief |
+| `game-art-director` | Define a reusable visual bible and asset brief |
 
 These skills are plain `SKILL.md` files with no agent-specific tools or runtime
 requirements. Keep `agents/skills/` as the canonical source in this dotfiles
@@ -61,3 +61,22 @@ project's `.agents/skills/`. Copy the game philosophy from the root
 
 Discovery locations: [Codex skills](https://developers.openai.com/codex/skills/)
 and [Cursor skills](https://cursor.com/docs/skills).
+
+### Focused compendium
+
+Each game skill links to its own `references/compendium.md`, containing source
+pointers, consultation triggers, studio application notes, and small experiments.
+Load it when the task has a relevant uncertainty, then select one or two entries.
+Keep the entire skill folder when copying skills into a game repository so
+relative reference links continue to work. No external reading is required for
+the basic workflow; books and videos deepen a specific decision when available.
+
+The compendium covers mechanic invention, evaluation, feel, art, and handheld
+usability. Broader reading lists and Reddit discovery threads are excluded.
+When adding a source, record author, URL, format/access, when to consult it,
+a practical application, and an experiment. Distinguish our adaptations from
+source claims and reviewed content from pointers awaiting inspection.
+
+All game skill names start with `game-`: `game-invent`, `game-evaluate`,
+`game-feel`, and `game-art-director`. Select the desired skill by name in your
+agent; these are skill folders, not executable `./game-*` commands.
