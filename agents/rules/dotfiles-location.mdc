@@ -1,0 +1,24 @@
+---
+description: Personal skills and user-level agent rules live in the dotfiles repo
+alwaysApply: true
+---
+
+# Skills
+
+Personal skills and user-level agent rules are versioned in `~/Code/dotfiles/agents/`.
+
+| Kind | Write here |
+| --- | --- |
+| Personal skill | `~/Code/dotfiles/agents/skills/<name>/SKILL.md` |
+| User-level rule | `~/Code/dotfiles/agents/rules/<name>.mdc` |
+
+When creating or updating a **personal/global** skill or user-level rule, write
+it in those dotfiles paths. App discovery paths are symlinks to these files;
+do not create a second copy outside the repo.
+
+Project skills and project rules still belong in the current repository.
+Never write into app-managed built-in skill directories.
+
+Re-run `~/Code/dotfiles/agents/link.zsh` if a link is missing or was replaced by
+a real directory. Start a new task to reload global instructions; restart the
+app if a new skill does not appear.

@@ -9,6 +9,6 @@ My dotfiles for macOS
 3. Run `./setup.zsh`
 4. Restart any terminals, run `p10k configure` and install the suggested font.
 
-Cursor skills and user-level agent rules live in [`cursor/`](cursor/README.md) and are symlinked by `setup.zsh`. Editor settings stay in Cursor’s account sync.
+Skills and user-level agent rules live in [`agents/`](agents/README.md) and are symlinked by `setup.zsh`.
 
 Enjoy! ✌️
