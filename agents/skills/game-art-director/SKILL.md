@@ -10,6 +10,42 @@ production budget. Respect established assets and explicit visual preferences.
 Choose a coherent direction; make the playable state readable before adding
 decoration. Deliver art direction, not generated assets, unless requested.
 
+## Named styles and reference research
+
+Treat the user's named games, artists, and style corrections as visual constraints,
+not just mood keywords. Before committing a direction or generating assets, inspect
+representative gameplay images from the named references. Prefer official screenshots
+or press kits over covers, promotional paintings, fan art, or memory. For animation
+claims, inspect footage or animation frames. Keep research focused on the properties
+that matter to this request; do not expand it into a general mood-board survey.
+
+Record a compact reference breakdown in the project's art notes: source link, what
+was actually viewed, properties to retain, properties to exclude, and the concrete
+production decision each observation supports. Compare silhouette/proportions,
+on-screen character scale, pixel-cluster size, shading and texture density, palette
+and value hierarchy, edge treatment, camera, and effect shapes. Distinguish observed
+properties from your proposed adaptation. If a reference cannot be inspected, say
+so and label any interpretation provisional rather than claiming a visual match.
+
+When references differ, assign them roles rather than blending them indiscriminately
+(for example, one for sprite economy and another for side-view staging). The user's
+stated preference determines priority. Interpret words such as "simpler" against
+the references: fewer internal shapes, flatter shading, less texture, or smaller
+sprites are different decisions. Ask only when a material ambiguity remains.
+
+Translate the comparison into positive, observable constraints in the art bible and
+asset prompts. A generic "pixel art" tag or a list of things to avoid is insufficient.
+For revisions, state what missed the target and which properties will change; do not
+preserve rejected detail merely because it appeared in your earlier proposal. Use
+prior generated images only for the properties that should survive the correction.
+
+Before expanding an asset family, compare a representative result to the selected
+references at intended gameplay scale. Judge style fidelity separately from general
+attractiveness and readability; an attractive image can still miss the brief. If it
+misses the requested traits, make a focused revision before extending that direction.
+Keep actual-device, grayscale, and motion checks pending until performed.
+
+
 ## Reusable art bible
 
 Fill this compact format with concrete decisions, not adjectives alone:

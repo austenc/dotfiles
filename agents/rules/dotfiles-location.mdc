@@ -16,6 +16,12 @@ When creating or updating a **personal/global** skill or user-level rule, write
 it in those dotfiles paths. App discovery paths are symlinks to these files;
 do not create a second copy outside the repo.
 
+Laravel Boost and other framework guideline skills belong here too: testing,
+Laravel, Livewire, Volt, Horizon, Fortify, Flux, Tailwind, Pest, Inertia, and
+the same kind of package skill. Do not keep a second copy in a project's
+`.cursor/skills`, `.github/skills`, or `.agents/skills`. If Boost installs
+them into a project, move them into dotfiles and remove the project copy.
+
 Project skills and project rules still belong in the current repository.
 Never write into app-managed built-in skill directories.
 
