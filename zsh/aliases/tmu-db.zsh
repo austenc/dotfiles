@@ -2,6 +2,7 @@
 # Usage: tmu-db <backup.zip|file.sql|file.sql.gz> <database>
 # CREATE DATABASE / USE lines in the dump are removed, so the data always
 # lands in <database> no matter what the backup's database was called.
+# If <database> already exists you must type its name before it is replaced.
 function tmu-db() {
     local file=$1 db=$2
     local -a mysql_cmd=(mysql --socket /tmp/mysql_3306.sock -uroot)
@@ -24,17 +25,24 @@ function tmu-db() {
         *) echo "File is not .zip, .sql or .sql.gz: $file"; return 1 ;;
     esac
 
-    # Ask before replacing a database that already has tables
-    local count
-    count=$("${mysql_cmd[@]}" -N -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='$db'") \
+    case $db in
+        mysql|sys|information_schema|performance_schema)
+            echo "Refusing to import into the $db system database"; return 1 ;;
+    esac
+
+    # Replacing an existing database requires typing its name
+    local exists
+    exists=$("${mysql_cmd[@]}" -N -e "SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name='$db'") \
         || { echo "Could not connect to mysql"; return 1 }
-    if (( count > 0 )); then
-        local reply
-        read -q "reply?Database '$db' already has $count tables. Drop and recreate it? (y/N) "
-        echo
-        [[ $reply == y ]] || { echo "Cancelled"; return 1 }
+    if (( exists )); then
+        local count reply
+        count=$("${mysql_cmd[@]}" -N -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='$db'") || return 1
+        echo "Database '$db' already exists with $count tables. Importing will DELETE everything in it."
+        read -r "reply?Type the database name to drop and replace it: "
+        [[ $reply == $db ]] || { echo "Cancelled, $db was not changed"; return 1 }
+        "${mysql_cmd[@]}" -e "DROP DATABASE \`$db\`" || return 1
     fi
-    "${mysql_cmd[@]}" -e "DROP DATABASE IF EXISTS \`$db\`; CREATE DATABASE \`$db\`;" || return 1
+    "${mysql_cmd[@]}" -e "CREATE DATABASE \`$db\`" || return 1
 
     echo "Importing ${entry:-$file} into $db..."
     local start=$SECONDS
