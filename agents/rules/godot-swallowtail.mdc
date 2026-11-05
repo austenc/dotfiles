@@ -1,0 +1,12 @@
+---
+description: Use Swallowtail for Godot project development and verification
+alwaysApply: true
+---
+
+For Godot project setup, implementation, debugging, or playtesting, always use
+Swallowtail by default and read
+`~/Code/dotfiles/agents/skills/godot-swallowtail/SKILL.md`.
+Prefer its live editor/runtime tools and verification workflow for supported
+operations. Apply this alongside the relevant game design skills. Pure concept
+brainstorming does not require launching Godot. Honor explicit user overrides;
+if Swallowtail is unavailable, diagnose it and disclose any unverified behavior.

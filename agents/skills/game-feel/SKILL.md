@@ -43,6 +43,29 @@ untested assumptions. If changing code, follow the project's conventions and
 report what was actually played or measured. Do not present universal timing
 presets as validated values for this game.
 
+## Missed or ambiguous action inputs
+
+For intermittent input reports, trace press, hold, release, buffering, eligibility,
+consumption and final velocity/action state. An accepted action can still feel
+ignored if a later state overwrites it or a release reduces it to negligible motion.
+Test ordered rapid edges, direction changes, landing buffers, conflicting actions,
+hit-stop, pause and respawn. Preserve event order when combining event callbacks
+with frame polling; reset stale intent without discarding a fresh post-reset press.
+Compare short and held actions at representative physics rates. Report measured
+height, latency or distance, not only that an animation changed. Borrow principles
+from reference controllers only after checking their state transitions and bugs.
+
+When a user requests scored critique, define the rubric before rescoring. Keep
+independent critics independent; passing tests cannot establish subjective fun or
+commercial visual quality. Iterate on concrete blockers and record remaining
+untested conditions. Do not raise a score merely to meet a requested threshold.
+
+Keep visual staging separate from action-only playtests. If editor/runtime tools
+share files, ports, input injection or save paths across instances, isolate test
+processes before running them concurrently. A screenshot setup that changes
+position, health or encounter state invalidates an overlapping gameplay run;
+discard the affected evidence and repeat it without intervention.
+
 ## Focused references
 
 When diagnosing feedback or camera behavior, read

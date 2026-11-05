@@ -1,12 +1,6 @@
 ---
 name: tmu-review
-description: >-
-  Review a TMU pull request for coding standards, Linear-issue fit, and
-  oversights, then give the user a paste-ready brief: what to do, which
-  lines to comment on, and the comment text. Post on GitHub only after
-  the user confirms. Use when the user asks to review a TMU PR, passes a
-  TMU Linear issue ID (e.g. TMU-123), a Linear URL, a GitHub PR URL, or
-  says /tmu-review.
+description: Review a TMU pull request for coding standards, Linear-issue fit, and oversights, then give the user a readable brief plus an exported Markdown draft they paste into GitHub themselves. Never posts to GitHub. Use when the user asks to review a TMU PR, passes a TMU Linear issue ID (e.g. TMU-123), a Linear URL, a GitHub PR URL, or says /tmu-review.
 ---
 
 # TMU PR review
@@ -15,7 +9,7 @@ On-demand review workflow for TMU PRs. Prefer a Linear issue ID; fall back to a 
 
 PRs may target **core** (`hdmastr/core`) **or a state/client application** (e.g. missouri, ohio, mass-cna). Linear is the guide: the issue usually links the GitHub PR. Do not assume core.
 
-Give the user a review they can paste onto the PR themselves. Tell them which GitHub action to take, which lines to comment on, and the exact text for each comment. Do not post, approve, or request changes on GitHub during the review. After the brief, ask if they want those comments posted, and wait.
+The output is a draft for Austen to review and post by hand. **Never post, comment, approve, request changes, or react on GitHub or Linear — and don't offer to.** Don't end with "want me to post this?". Austen does all reviews manually.
 
 ## Kickoff
 
@@ -37,7 +31,7 @@ If neither an issue ID nor a PR URL is given, ask for one. Do not browse open PR
 1. Linear MCP `get_issue` for the ID — pull identifier, title, description / acceptance criteria, branch name, attachments/links, and comments (`list_comments` if needed).
 2. Find the GitHub PR URL from the issue — **do not assume `hdmastr/core`**:
    - Prefer an explicit GitHub PR link in the description, attachments, or comments (most reliable for client apps).
-   - Else use Linear’s git branch name with `gh pr list` — try the repo implied by the issue (project/label/title/client name) before falling back to core.
+   - Else use Linear's git branch name with `gh pr list` — try the repo implied by the issue (project/label/title/client name) before falling back to core.
    - Last resort search: `gh search prs "TMU-123" --owner hdmastr --state open` (or org-wide search) and pick the matching open PR.
 3. If multiple PRs match, prefer the open one targeting `develop`. If still ambiguous, ask the user.
 4. If no PR exists, stop and say so — do not invent a review from the issue alone.
@@ -48,7 +42,7 @@ If neither an issue ID nor a PR URL is given, ask for one. Do not browse open PR
 2. Load the PR with `gh pr view <n> --repo <owner>/<repo> --json title,body,baseRefName,headRefName,files,commits,author,state,url,labels`.
 3. If the title/body/branch mentions `TMU-\d+`, fetch that Linear issue + comments as context. If none, review from the PR description alone.
 
-### 2. Move into the PR’s repo
+### 2. Move into the PR's repo
 
 After the PR repo is known, call `move_agent_to_root` on the matching local checkout **before** substantive review:
 
@@ -71,11 +65,12 @@ gh pr diff <n> --repo <owner>/<repo>
 gh pr checks <n> --repo <owner>/<repo>
 ```
 
-Also skim existing PR review comments / conversation when relevant:
+Also skim existing PR review comments / conversation when relevant, so you don't repeat a note someone already left:
 
 ```bash
 gh api repos/<owner>/<repo>/pulls/<n>/comments
 gh api repos/<owner>/<repo>/issues/<n>/comments
+gh api repos/<owner>/<repo>/pulls/<n>/reviews
 ```
 
 Do **not** check out the PR branch unless you need to run tests or inspect files that `gh pr diff` cannot show clearly. Prefer read-only review via `gh` when possible. If the working tree is dirty with unrelated work, do not stash or switch branches without asking.
@@ -105,12 +100,12 @@ Read `/Users/austen/Code/bedrock/core/AGENTS.md` for the sections that match the
 - Bulk `update()` / `where()->update()` that no longer fires model events the old `find()` + `save()` path did.
 - Domain rules flattened into one case (more than one fee per attempt, config on and off, date boundaries, contractual reports).
 - Authorization on the Livewire action or route, not only the button that links to it.
-- A class, view, or route states override: will existing client overrides still behave?
+- A class, view, or route states override: will existing client overrides still behave? Removed config keys that a state may still set.
 
 **Tests**
 
-- Names describe the behavior: `test_observer_cannot_edit_payout_comments`. `cannot` is one word. The method name matches the file’s subject.
-- Happy and sad paths. When the change is behind config, cover the flag on and off.
+- Names describe the behavior: `test_observer_cannot_edit_payout_comments`. `cannot` is one word. The method name matches the file's subject.
+- Happy and sad paths. When the change is behind config or an option, cover it on and off.
 - A bugfix gets a test that would have failed before the fix, when that is practical.
 - The actor who must be denied is tested, not only the actor who is allowed.
 - Unrelated tests are not rewritten or removed in passing.
@@ -120,9 +115,9 @@ Read `/Users/austen/Code/bedrock/core/AGENTS.md` for the sections that match the
 
 - New names are guessable and unabbreviated. Prefer active tense (`default_approval_message`).
 - Date columns use `_at` unless that table already uses another suffix.
-- Don’t prefix a column with the table’s own noun (`facility_citations.end_at`).
+- Don't prefix a column with the table's own noun (`facility_citations.end_at`).
 - Config keys match their env names and the keys beside them.
-- New “event” names say `testevent`. A bare `event` collides with Laravel’s events and with older names in this app.
+- New "event" names say `testevent`. A bare `event` collides with Laravel's events and with older names in this app.
 - Artisan signatures stay in the `core:` family when nearby commands do.
 - Root aliases (`use \Student;`), including Livewire routes, so a state can override the class without overriding the route.
 
@@ -131,11 +126,11 @@ Read `/Users/austen/Code/bedrock/core/AGENTS.md` for the sections that match the
 - UI-kit props and variants that actually exist. An invented prop will render nothing useful.
 - Slot tags use the shorthand that matches at both ends: `<x-slot:trigger>` … `</x-slot:trigger>`. Component attributes are kebab-case (`:label-help-text`), except the `:$prop` shorthand.
 - Reuse an existing cell, button, icon, badge, or mail table component before adding a one-off.
-- Wording a non-technical user will understand, including what will happen next (“this note is sent to the applicant”).
+- Wording a non-technical user will understand, including what will happen next ("this note is sent to the applicant").
 - Primary actions sit where the rest of the app puts them (the end of the row).
 - Livewire: `notify()` when that is the local pattern, instead of flash plus redirect; computed properties instead of serializing a large option list into the component tag; `:key` in loops; a unique form `id`; typehinted optional models.
 - `use Illuminate\Support\Carbon`, not the Carbon package class.
-- Unused imports inside Blade. Pint does not catch those.
+- Unused imports or variables inside Blade. Pint does not catch those.
 - `@js` when a value is crossing into Alpine or JavaScript, so numbers and strings are encoded.
 
 **Shape of the change**
@@ -144,13 +139,13 @@ Read `/Users/austen/Code/bedrock/core/AGENTS.md` for the sections that match the
 - Co-locate a one-off export or helper on the component that uses it.
 - Share methods between a Livewire class and a Volt component with a trait when they are actually the same.
 - Destructive migrations (drop or rename) stay separable from the feature so a revert still has the old data.
-- A new column’s default belongs on the schema, not only in a seeder.
-- Queries should stay equivalent, and an “optimization” should not drop eager loads the screen still needs.
-- A rename that missed a call site, a leftover comment that doesn’t help, or debug output, secrets, or tooling attribution left in the diff or PR text.
+- A new column's default belongs on the schema, not only in a seeder.
+- Queries should stay equivalent, and an "optimization" should not drop eager loads the screen still needs.
+- A rename that missed a call site, a leftover comment that doesn't help, or debug output, secrets, or tooling attribution left in the diff or PR text.
 
 **Changelog**
 
-- User-facing or notable changes get a line under `## [Unreleased]` in that repo’s `changelog.md`, with the Linear ID when there is one.
+- User-facing or notable changes get a line under `## [Unreleased]` in that repo's `changelog.md`, with the Linear ID when there is one.
 - Lead with a clear verb: added, changed, fixed, updated, removed. Say what the user can do now.
 - A missing or vague line is a note, not a merge block, unless the entry would mislead someone cutting a release.
 
@@ -163,111 +158,159 @@ Using the Linear description + comments (or PR body if no issue):
 - Scope that should be its own PR, versus a drive-by that is already done and harmless?
 - For **client** PRs: is this a client override, config, or state-specific behavior, or does it belong in core?
 
-### 7. Voice
+### 7. Voice — write like Austen
 
-The suggested summary and inline comments should sound like a teammate who read the diff carefully and wants the author to succeed. Direct and kind at the same time.
+Comments should read like Austen typed them between meetings: short, casual, curious, and generous. Not like a linter, and not like a formal code-review template. The goal is that the author fixes the thing *and* feels good about it, so lean on the "How to Win Friends and Influence People" moves:
 
-Write each inline comment in this order: the observation, why it matters, then a concrete suggestion when you have one. One issue per comment. Ask when the diff does not show the reason; don’t turn a question into a verdict.
+- **Start with honest, specific praise** when there's something real to praise ("Nice tests, great feature addition!", "This will be really nice to have when investigating!"). Never invent it.
+- **Ask instead of tell.** Most notes should be questions that let the author reach the fix themselves and save face if they already had a reason. Questions are the default; statements are for clear-cut house conventions or actual bugs.
+- **Point at the code, not the person.** "This looks like it's missing a `?`" — not "you missed a `?`".
+- **Assume there was a reason.** "Curious why…" and "Any reason…" leave room for "oh, because X" without anyone being wrong.
+- **Offer help** when something is fiddly ("I didn't fully investigate but I can if you'd like.", "Maybe we can link up and talk about it?").
+- **Make the bar clear.** Say plainly when something is optional ("Not that it really matters, but…", "Not worried about it…") versus when it should change before merge.
 
-Use the author’s name only if you are replying to something they asked. “We” is for the codebase. “Could we…” and “I think…” are for preferences. Say plainly when something is optional and the PR can merge without it.
+Openers Austen actually uses — rotate them, don't use the same one twice in a row:
 
-Do not write sarcasm, teasing, hype, or a verdict about the author. Skip emoji, “send it”, “shame”, “slop”, “bad”, and openers like “you should have” or “you didn’t”. Don’t stack rhetorical questions. Don’t apologize for reviewing.
+- "Curious why …?"
+- "Any reason you chose … instead of …?"
+- "Do we need … anymore?"
+- "Does this `$roles` variable get used in the view?"
+- "Could we … instead?" / "Couldn't we just …?"
+- "Maybe … would be nice?"
+- "I think we should …" / "I think we could …"
+- "Should we be using … here?"
+- "I'm not finding … in [the docs](…)? … Are you sure this is working as intended?"
+- "Not that it really matters, but …"
+- "Probably can remove this comment, it's not overly useful?"
 
-A house convention can be stated once, with the reason (matching slot tags, Carbon’s support class, `testevent`). Call something a personal preference when it is one, and mark it optional.
+Style:
 
-Good shapes:
+- Short. One to three sentences per inline comment is typical. One issue per comment.
+- Casual punctuation is fine: an ellipsis for a trailing thought, a "hmm", a single 🤔 on a genuine head-scratcher. Keep it to one per review.
+- When a convention needs a reason, give it once, briefly ("…because it's easier to see which end tag matches which start tag").
+- Link docs when you cite them. Include a GitHub `suggestion` block only when the replacement is complete and you're confident it's equivalent.
+- Summary: one or two short paragraphs, or praise + a short bulleted list when there are several before-merge items. End light: "Otherwise, looks good!", "Thanks for doing this!", "Couple comments you'll want to look at."
+- If the change is contractual or high-stakes (Pass/Fail, payouts, certifications), say why confidence matters ("Pass/Fail is such an important (contractually!) report that we should be super confident before we ship this.").
+
+Never: sarcasm, teasing, "slop", "vibe-coded", "bad", "shame", "send it", "you should have", "you didn't", stacked rhetorical questions, verdicts about the author, apologies for reviewing, or hype.
+
+Real examples to calibrate against:
 
 ```markdown
-This looks good. The filter matches the issue, and the tests cover the on and off cases.
-
-I left two optional notes on naming. Neither needs to change before merge.
+Curious why you didn't use `->notify()` here? I was surprised to see the flash + redirect combo.
 ```
 
 ```markdown
-This is close. The dialog copy is clear, and the happy path works.
-
-Before we merge, could we add a test for the config-off case and switch that slot to `<x-slot:trigger>` so the end tag matches? I left those on the diff. The other notes are optional.
+I don't think there's an `outline` property on the buttons in the UI kit. There's an outline _variant_ though — could we use that so the style actually applies?
 ```
 
 ```markdown
-Could we use a regular ternary here instead of the spread operators? I think that would be easier to follow.
+Think we should prefer the shorthand for the slot tag syntax:
+
+`<x-slot:trigger>` … `</x-slot:trigger>`
+
+It's easier to see which end tag matches which start tag that way.
 ```
 
 ```markdown
-I don't think these buttons have an `outline` property. The UI kit has an outline variant — could we use that so the style actually applies?
+This looks great, but I think we should make it more clear in the denial dialog that this message will be sent to the applicant. Some wording to explain that is enough!
 ```
 
-Use a GitHub suggestion block only when the replacement is complete and you are confident it is equivalent. If you are not sure it works, say so and skip the block.
+```markdown
+Approving this, but I'm curious why you chose to make a new test file for InstructorStudentsTest? Typically I'd have put that right into InstructorTest... but I've also thought we should maybe have "InstructorPortalTest" or similar. Curious what you think.
+```
 
 ### 8. Brief for the user
 
-Respond in chat only. Do **not** post GitHub or Linear comments, submit a review, approve, request changes, merge, or change Linear status in this step.
+Respond in chat **and** write an export file. Do not post anything anywhere.
 
-Lead with what the user should do on GitHub, then the text they can paste. Put each paste target in its own fenced block so a click copies one comment and nothing else. Quote the line (or the nearest method or heading, when the note is about something missing) so they can find it on the diff. Use the new-file line number from the diff when that line is part of the change.
+#### Writing comments so they're readable and pasteable
 
-Use this structure. Each comment sits in its own fence so it can be copied on its own:
+- Write each comment as normal Markdown paragraphs. Put a blank line between thoughts; never hard-wrap mid-sentence (GitHub renders single newlines as line breaks).
+- Use inline backticks for code names and fenced blocks only for actual code or `suggestion` blocks.
+
+#### Export file (the paste source)
+
+Write the full review to `~/.cursor/tmu-reviews/<repo>-<number>.md` (e.g. `~/.cursor/tmu-reviews/core-2962.md`), overwriting any previous draft for that PR, then open it with `cursor-app-control` → `open_resource` (`file:///Users/austen/.cursor/tmu-reviews/<repo>-<number>.md`). Austen copies from this file (raw or preview) into GitHub as a starting point.
+
+Structure of the export file:
 
 ````markdown
-## What to do
-**Approve** | **Approve with nits** | **Request changes**
+# Review draft: <owner>/<repo>#<n> — <PR title>
 
-One sentence on why, for the user. Say that nothing has been posted.
+<PR URL> · Linear: <TMU-123 link or "none">
 
-## Paste as the review summary
+**Suggested action:** Approve | Approve with nits | Request changes
 
-```
-The summary comment, ready to paste.
-```
+---
 
-## Lines to comment on
+## Summary comment
 
-### 1. Before merge — `path/to/file.php:42`
+<summary text as plain Markdown — this is what gets pasted>
 
-```
+---
+
+## 1. Before merge — `path/to/file.php:42`
+
+```php
 the line or snippet to anchor on
 ```
 
-```
-The comment to paste on that line.
-```
+<comment text as plain Markdown>
 
-### 2. Optional — `path/to/other.php` near `methodName`
+---
 
-```
-The comment to paste. This note is optional; the PR can merge without it.
-```
+## 2. Optional — `path/to/other.blade.php` near `methodName`
+
+<comment text>
+````
+
+Each comment's text sits directly under its anchor as plain Markdown (not inside a fence), so it reads naturally in preview and pastes into GitHub with formatting intact.
+
+#### Chat response
+
+Keep the chat readable at a glance. Use this structure:
+
+```markdown
+## Suggested action: **Request changes**
+
+One or two sentences on why, for Austen. Mention the export file path.
+
+## Summary comment
+
+> Summary text as a blockquote (wraps nicely in chat).
+
+## Line comments
+
+### 1. Before merge · `src/Reports/PassFail.php:120`
+`anchor line` (inline code; a short fenced block if it's multi-line code)
+
+> Comment text as a blockquote, short paragraphs.
+
+### 2. Optional · `resources/views/.../generate.blade.php:88`
+…
 
 ## For you
 
-### Standards
-Brief note on AGENTS.md / local convention fit.
+**Standards:** brief note on AGENTS.md / local convention fit.
 
-### Intent
-How well the PR matches the Linear issue (or PR description). Cite acceptance criteria that are met or missed.
-````
+**Intent:** how well the PR matches the Linear issue (or PR description) — acceptance criteria met or missed.
+```
 
-Skip "Lines to comment on" when there is nothing worth pasting. Skip a "For you" subsection when it would only repeat the summary.
+Skip "Line comments" when there's nothing worth commenting. Skip a "For you" subsection when it would only repeat the summary. End after "For you" — no offer to post.
 
-End the response by asking whether to post this review. Wait for a yes. Do not treat the original review request as that yes.
+**Suggested action:**
 
-**What to do:**
-
-- **Approve** — solves the intended problem, and there is nothing worth commenting. The summary can be a short approval note, and there is no line list.
-- **Approve with nits** — only optional notes or questions. The summary says the PR can merge without those changes. Tell the user to approve, and to paste the line notes as comments.
+- **Approve** — solves the intended problem, and there is nothing worth commenting. The summary can be a short approval note ("Looks good!", "This looks good and works as advertised! Thanks for fixing it!").
+- **Approve with nits** — only optional notes or questions. The summary says the PR can merge without those changes.
 - **Request changes** — a likely bug, a missed acceptance criterion, a broken convention the repo actually keeps (aliases, slot tags, Carbon import, `testevent` naming, UI-kit API), a missing test on important or contractual behavior, a destructive migration mixed into the feature, a failed relevant check, or a state-override hazard.
 
 Style nits, changelog wording, and stated preferences are optional unless they change behavior or user-facing meaning. Do not recommend requesting changes for a pile of optional notes.
 
-### 9. Posting after confirmation
-
-Post only after the user confirms in a later message. Post the summary and the line comments they kept. If they name a verdict, use it; if they only say to comment, submit a comment review and do not approve or request changes.
-
-Anchor each inline comment to the diff's latest commit, path, and line. When a note cannot be attached to a diff line, include it in the review body instead of dropping it. Do not change Linear state, merge, or dismiss other reviews.
-
 ## Non-goals
 
+- Posting, commenting, approving, requesting changes, or reacting on GitHub or Linear — ever, and offering to do so
 - Implementing fixes (unless the user asks after the review)
-- Posting the review to GitHub or Linear before the user confirms
 - Changing Linear workflow state
 - Merging or dismissing other reviews
 - Browsing the PR queue for something to review
@@ -275,4 +318,4 @@ Anchor each inline comment to the diff's latest commit, path, and line. When a n
 
 ## Iteration notes
 
-Voice and the review lens came from Austen’s reviews on `hdmastr/core`: short summaries, line-level comments, suggestion blocks when the fix is obvious, and a hard look at naming, tests, equivalence, and UI consistency. Keep the paste-ready comments kind even when an older review was sharper. The brief is for the user to paste; posting waits for a later confirmation. Prefer updating this file when a new house convention shows up repeatedly.
+Voice and the review lens came from Austen's own comments on `hdmastr/core`: short summaries, question-first line comments, suggestion blocks when the fix is obvious, and a hard look at naming, tests, equivalence, and UI consistency. When an older comment of his was sharper than it needed to be, keep the curiosity and drop the edge. Prefer updating this file when a new house convention shows up repeatedly.
